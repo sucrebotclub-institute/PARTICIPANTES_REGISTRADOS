@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('647agTJlgkG1SEqVa');</script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -681,7 +683,7 @@
 
 <script>
   /* ══════════════════ CONFIG ══════════════════ */
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxgMyluxScFqi25M2e9KNllvdREZuLHgS9Y84M5DbqjSpV1w7W9mZX7o4OYZkmgrmBC/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycby8lWwSG8L4PvyY_nazuApGSGoubIwA4oq-_nI1Rse8eeqYYum0o98kB_zz-KoozBGYeQ/exec';
 
   async function gasGet(params) {
     const url = GAS_URL + '?' + new URLSearchParams(params);
@@ -795,22 +797,53 @@
 
   async function aprobarParticipante() {
     if (!participanteEnRevision) return;
+    const p   = participanteEnRevision;
     const btn = document.getElementById('btn-aprobar');
     btn.disabled    = true;
     btn.textContent = '⏳ Aprobando...';
+
     try {
-      await gasPost({ action: 'aprobarParticipante', id: participanteEnRevision.id });
+      // 1. Marcar como aprobado en el GAS
+      await gasGet({ action: 'aprobarParticipante', id: p.id });
+
+      // 2. Generar QR en el browser como imagen base64
+      const textoQR = 'SUCREBOT 2026'
+        + ' | Robot: '        + p.robot
+        + ' | Categoria: '    + p.categoria
+        + ' | Institucion: '  + p.institucion
+        + ' | Ciudad: '       + p.ciudad
+        + ' | Participante: ' + p.nombre
+        + ' | ID: '           + p.id;
+
+      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data='
+                  + encodeURIComponent(textoQR);
+
+      // 3. Enviar email con EmailJS
+      await emailjs.send('service_t1tb15d', 'template_s9ap2wh', {
+        correo_destino: p.correo,
+        nombre:         p.nombre,
+        nombre_robot:   p.robot,
+        institucion:    p.institucion,
+        categoria:      p.categoria,
+        ciudad:         p.ciudad,
+        qr_image:       qrUrl,
+        name:           'SucreBot 2026',
+        email:          'sucrebotclub@tecnologicosucre.edu.ec'
+      });
+
+      // 4. Actualizar localStorage
       const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
-      const idx   = lista.findIndex(p => p.id === participanteEnRevision.id);
+      const idx   = lista.findIndex(x => x.id === p.id);
       if (idx >= 0) lista[idx].aprobado = true;
       localStorage.setItem('participantes', JSON.stringify(lista));
+
       cerrarModalRevisar();
       cargarListaLocal();
       showToast('✔ Aprobado — QR enviado por email');
     } catch(e) {
       btn.disabled    = false;
       btn.textContent = '✔ Aprobar y enviar QR';
-      showToast('Error al aprobar: ' + e.message, true);
+      showToast('Error: ' + (e.text || e.message || JSON.stringify(e)), true);
     }
   }
 
