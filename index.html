@@ -434,8 +434,8 @@
 
   <nav>
     <!-- ↓ Cambia "active" a la página actual -->
-    <a href="https://sucrebotclub-institute.github.io/INICIO/">Inicio</a>
-    <a href="https://sucrebotclub-institute.github.io/INICIO/#institucion">Institución</a>
+    <a href="https://sucrebotclub-institute.github.io/INICIO/" id="navInicio">Inicio</a>
+    <a href="https://sucrebotclub-institute.github.io/INICIO/#institucion" id="navInstitucion">Institución</a>
 
     <div class="nav-dropdown" id="navEventos">
       <a href="https://sucrebotclub-institute.github.io/INICIO/#eventos">Eventos</a>
@@ -458,7 +458,7 @@
       </div>
     </div>
 
-    <a href="https://sucrebotclub-institute.github.io/INICIO/#participantes" class="active">Participantes</a>
+    <a href="https://sucrebotclub-institute.github.io/PARTICIPANTES_REGISTRADOS/" id="navParticipantes" class="active">Participantes</a>
     <a href="https://sucrebotclub-institute.github.io/INICIO/#staff" id="navStaff">Staff</a>
   </nav>
 
@@ -675,6 +675,22 @@
       a.classList.add('active');
     });
   });
+
+  // Desactivar links del nav cuando ya estamos en esa página
+  (function() {
+    const url = window.location.href;
+    const checks = {
+      'navParticipantes': url.includes('PARTICIPANTES_REGISTRADOS'),
+      'navInicio':        url.includes('/INICIO') && !url.includes('REGISTRO') && !url.includes('PARTICIPANTES')
+    };
+    Object.entries(checks).forEach(([id, isHere]) => {
+      const el = document.getElementById(id);
+      if (el && isHere) {
+        el.addEventListener('click', e => e.preventDefault());
+        el.style.cursor = 'default';
+      }
+    });
+  })();
 </script>
 
 
@@ -683,7 +699,7 @@
 
 <script>
   /* ══════════════════ CONFIG ══════════════════ */
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyWDqc6vw2yIUU298fqaffjQwTAX8gIuLEET6YxNAajuK3IitWWlU6pHX0c8NDPJsR6dA/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycby8lWwSG8L4PvyY_nazuApGSGoubIwA4oq-_nI1Rse8eeqYYum0o98kB_zz-KoozBGYeQ/exec';
 
   async function gasGet(params) {
     const url = GAS_URL + '?' + new URLSearchParams(params);
