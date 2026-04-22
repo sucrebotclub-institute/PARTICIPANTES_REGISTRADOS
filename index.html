@@ -303,10 +303,11 @@
       /* Ocultar cabecera de columnas en móvil */
       .lista-header { display: none; }
 
-      /* Cada fila como tarjeta vertical */
+      /* Cada fila como tarjeta vertical alineada a la izquierda */
       .lista-item {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         gap: 6px;
         padding: 14px 0;
       }
@@ -316,8 +317,12 @@
       /* Modal más compacto */
       .modal-revisar-datos { grid-template-columns: 1fr; }
 
-      /* Wrapper con menos padding */
+      /* Wrapper con menos padding y más espacio arriba */
       .wrapper { padding: 0 12px 40px; }
+
+      /* Más espacio para el sticky header en móvil */
+      body { padding-top: 210px; }
+      main { min-height: calc(100vh - 210px); }
     }
 
     /* Botón Revisar (solo staff) */
