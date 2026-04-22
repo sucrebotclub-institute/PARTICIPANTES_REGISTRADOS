@@ -237,20 +237,25 @@
     .lista-title { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
     .lista-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); }
     .lista-item:last-child { border-bottom: none; }
-    .lista-robot { font-size: 0.9rem; font-weight: 500; color: #ffffff; }
-    .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+    .lista-robot { font-size: 0.9rem; font-weight: 600; color: #ffffff; }
+    .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.75); }
     .btn-ver {
-      background: none; border: 1px solid var(--border); color: var(--muted);
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); color: #ffffff;
       font-size: 0.75rem; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
-    .btn-ver:hover { border-color: var(--accent); color: var(--accent); }
-    .empty-list { color: rgba(255,255,255,0.7); font-size: 0.85rem; text-align: center; padding: 24px 0; }
+    .btn-ver:hover { background: rgba(255,255,255,0.25); border-color: #ffffff; }
+    .empty-list { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-align: center; padding: 24px 0; }
     .lista-actions { display: flex; gap: 6px; }
+    .lista-cat-badge {
+      font-size: 0.68rem; font-family: var(--font-mono);
+      background: rgba(255,255,255,0.2); color: #ffffff;
+      padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.35); margin-left: 6px;
+    }
     .btn-del {
-      background: none; border: 1px solid rgba(255,59,59,0.3); color: rgba(255,59,59,0.6);
+      background: rgba(255,80,80,0.2); border: 1px solid rgba(255,120,120,0.5); color: #ffaaaa;
       font-size: 0.75rem; padding: 5px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
-    .btn-del:hover { background: rgba(255,59,59,0.1); border-color: var(--red); color: var(--red); }
+    .btn-del:hover { background: rgba(255,59,59,0.35); border-color: #ff8888; color: #ffffff; }
 
     /* Modal borrar */
     .modal-overlay {
@@ -260,26 +265,26 @@
     }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
     .modal-box {
-      background: var(--surface2); border: 1px solid rgba(255,59,59,0.3); border-radius: 16px;
+      background: #1a5ca8; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px;
       padding: 28px 28px 22px; max-width: 360px; width: 90%;
       transform: scale(0.92); transition: transform 0.2s;
     }
     .modal-overlay.show .modal-box { transform: scale(1); }
     .modal-icon { font-size: 2rem; margin-bottom: 10px; }
-    .modal-title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--red); margin-bottom: 8px; }
-    .modal-name { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .modal-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 22px; }
+    .modal-title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: #ffaaaa; margin-bottom: 8px; }
+    .modal-name { font-size: 1rem; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
+    .modal-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-bottom: 22px; }
     .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .modal-cancel {
-      background: none; border: 1px solid var(--border); color: var(--muted);
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3); color: #ffffff;
       font-family: var(--font-body); font-size: 0.85rem; padding: 11px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
     }
-    .modal-cancel:hover { color: var(--text); border-color: var(--text); }
+    .modal-cancel:hover { background: rgba(255,255,255,0.22); }
     .modal-confirm {
-      background: rgba(255,59,59,0.12); border: 1px solid rgba(255,59,59,0.4); color: var(--red);
+      background: rgba(255,59,59,0.25); border: 1px solid rgba(255,120,120,0.5); color: #ffcccc;
       font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 11px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
     }
-    .modal-confirm:hover { background: rgba(255,59,59,0.22); }
+    .modal-confirm:hover { background: rgba(255,59,59,0.45); color: #ffffff; }
 
     /* Toast */
     .toast {
