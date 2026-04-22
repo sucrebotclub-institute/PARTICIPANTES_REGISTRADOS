@@ -226,36 +226,77 @@
     .lista-filter select option { background: #1a5ca8; color: #ffffff; }
     .lista-filter select:focus { border-color: var(--cyan); }
     .lista-count { font-size: 0.72rem; color: #1a3a6e; font-family: var(--font-mono); margin-bottom: 10px; }
-    .lista-cat-badge {
-      font-size: 0.68rem; font-family: var(--font-mono);
-      background: rgba(0,212,255,0.1); color: var(--accent);
-      padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,212,255,0.2); margin-left: 6px;
-    }
     .lista-card {
       background: #1a5ca8; border: 1px solid #1a5ca8; border-radius: 16px; padding: 20px;
     }
-    .lista-title { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
-    .lista-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .lista-title { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+
+    /* Cabecera de columnas */
+    .lista-header {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 2fr 1fr;
+      gap: 8px;
+      padding: 0 0 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      margin-bottom: 4px;
+    }
+    .lista-header span {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.55); text-transform: uppercase;
+    }
+
+    /* Filas */
+    .lista-item {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 2fr 1fr;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
     .lista-item:last-child { border-bottom: none; }
-    .lista-robot { font-size: 0.9rem; font-weight: 600; color: #ffffff; }
-    .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.75); }
+    .lista-robot { font-size: 0.88rem; font-weight: 600; color: #ffffff; }
+    .lista-cat-badge {
+      display: inline-block;
+      font-size: 0.68rem; font-family: var(--font-mono);
+      background: #1a3a6e; color: #ffffff;
+      padding: 3px 8px; border-radius: 10px; border: 1px solid #0e2550;
+    }
+    .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.85); }
+
+    /* Estado aprobación */
+    .badge-aprobado {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.65rem; font-family: var(--font-mono); font-weight: 600;
+      background: rgba(0,200,100,0.2); color: #5dffb0;
+      border: 1px solid rgba(0,200,100,0.4);
+      padding: 3px 8px; border-radius: 10px;
+    }
+    .badge-pendiente {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.65rem; font-family: var(--font-mono); font-weight: 600;
+      background: rgba(255,180,0,0.15); color: #ffd966;
+      border: 1px solid rgba(255,180,0,0.35);
+      padding: 3px 8px; border-radius: 10px;
+    }
+
+    .empty-list { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-align: center; padding: 24px 0; }
+    .lista-actions { display: flex; gap: 6px; }
     .btn-ver {
       background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); color: #ffffff;
       font-size: 0.75rem; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
     .btn-ver:hover { background: rgba(255,255,255,0.25); border-color: #ffffff; }
-    .empty-list { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-align: center; padding: 24px 0; }
-    .lista-actions { display: flex; gap: 6px; }
-    .lista-cat-badge {
-      font-size: 0.68rem; font-family: var(--font-mono);
-      background: #1a3a6e; color: #ffffff;
-      padding: 2px 8px; border-radius: 10px; border: 1px solid #1a3a6e; margin-left: 6px;
-    }
     .btn-del {
       background: rgba(255,80,80,0.2); border: 1px solid rgba(255,120,120,0.5); color: #ffaaaa;
       font-size: 0.75rem; padding: 5px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
     .btn-del:hover { background: rgba(255,59,59,0.35); border-color: #ff8888; color: #ffffff; }
+
+    @media (max-width: 600px) {
+      .lista-header { display: none; }
+      .lista-item { grid-template-columns: 1fr 1fr; row-gap: 4px; }
+    }
 
     /* Modal borrar */
     .modal-overlay {
@@ -405,6 +446,12 @@
 
     <div class="lista-card">
       <div class="lista-title">PARTICIPANTES REGISTRADOS</div>
+      <div class="lista-header">
+        <span>Robot</span>
+        <span>Categoría</span>
+        <span>Institución</span>
+        <span>Estado</span>
+      </div>
       <div id="lista-participantes"><p class="empty-list">Cargando participantes...</p></div>
     </div>
   </div>
@@ -600,14 +647,19 @@
       el.innerHTML = '<p class="empty-list">' + (filtro ? 'No hay inscritos en esta categoría.' : 'Aún no hay participantes.') + '</p>';
       return;
     }
-    el.innerHTML = lista.slice().reverse().map(p => `
+    el.innerHTML = lista.slice().reverse().map(p => {
+      const aprobado = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
+      const badgeEstado = aprobado
+        ? `<span class="badge-aprobado">✔ Aprobado</span>`
+        : `<span class="badge-pendiente">⏳ Pendiente</span>`;
+      return `
       <div class="lista-item">
-        <div>
-          <div class="lista-robot">${p.robot}${p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : ''}</div>
-          <div class="lista-inst">${p.nombre ? p.nombre + ' · ' : ''}${p.institucion}${p.ciudad ? ' · ' + p.ciudad : ''}</div>
-        </div>
-      </div>
-    `).join('');
+        <div class="lista-robot">${p.robot}</div>
+        <div>${p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : '—'}</div>
+        <div class="lista-inst">${p.institucion || '—'}</div>
+        <div>${badgeEstado}</div>
+      </div>`;
+    }).join('');
   }
 
   /* ══════════════════ BORRAR ══════════════════ */
