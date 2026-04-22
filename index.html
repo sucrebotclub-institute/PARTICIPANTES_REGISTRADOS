@@ -409,6 +409,15 @@
     .btn-rev-aprobar:hover { background: #1a3a6e; }
     .btn-rev-aprobar:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    .btn-rev-reenviar {
+      background: #1a3a6e; border: 1px solid #1a3a6e; color: #ffffff;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+      padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
+      width: 100%;
+    }
+    .btn-rev-reenviar:hover { background: #0e2550; }
+    .btn-rev-reenviar:disabled { opacity: 0.5; cursor: not-allowed; }
+
     /* Toast */
     .toast {
       position: fixed; bottom: 30px; left: 50%;
@@ -571,6 +580,7 @@
       <div class="modal-revisar-btns">
         <button id="btn-eliminar" class="btn-rev-eliminar" onclick="eliminarParticipante()">🗑 Eliminar registro</button>
         <button id="btn-aprobar"  class="btn-rev-aprobar"  onclick="aprobarParticipante()">✔ Aprobar y enviar QR</button>
+        <button id="btn-reenviar" class="btn-rev-reenviar" onclick="reenviarQR()" style="display:none;grid-column:1/-1;">📧 Reenviar QR por email</button>
       </div>
 
     </div>
@@ -818,14 +828,18 @@
     }
 
     const btnAprobar  = document.getElementById('btn-aprobar');
+    const btnReenviar = document.getElementById('btn-reenviar');
     if (aprobado) {
-      btnAprobar.textContent   = '✔ Ya aprobado';
-      btnAprobar.disabled      = true;
-      btnAprobar.style.opacity = '0.5';
+      btnAprobar.style.display  = 'none';
+      btnReenviar.style.display = 'block';
+      btnReenviar.textContent   = '📧 Reenviar QR por email';
+      btnReenviar.disabled      = false;
     } else {
-      btnAprobar.textContent   = '✔ Aprobar y enviar QR';
-      btnAprobar.disabled      = false;
-      btnAprobar.style.opacity = '1';
+      btnAprobar.style.display  = 'block';
+      btnReenviar.style.display = 'none';
+      btnAprobar.textContent    = '✔ Aprobar y enviar QR';
+      btnAprobar.disabled       = false;
+      btnAprobar.style.opacity  = '1';
     }
     document.getElementById('btn-eliminar').disabled = false;
     document.getElementById('modal-revisar').classList.add('show');
@@ -885,6 +899,46 @@
       btn.disabled    = false;
       btn.textContent = '✔ Aprobar y enviar QR';
       showToast('Error: ' + (e.text || e.message || JSON.stringify(e)), true);
+    }
+  }
+
+  async function reenviarQR() {
+    if (!participanteEnRevision) return;
+    const p   = participanteEnRevision;
+    const btn = document.getElementById('btn-reenviar');
+    btn.disabled    = true;
+    btn.textContent = '⏳ Enviando...';
+
+    try {
+      const textoQR = 'SUCREBOT 2026'
+        + ' | Robot: '        + p.robot
+        + ' | Categoria: '    + p.categoria
+        + ' | Institucion: '  + p.institucion
+        + ' | Ciudad: '       + p.ciudad
+        + ' | Participante: ' + p.nombre
+        + ' | ID: '           + p.id;
+
+      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data='
+                  + encodeURIComponent(textoQR);
+
+      await emailjs.send('service_t1tb15d', 'template_s9ap2wh', {
+        correo_destino: p.correo,
+        nombre:         p.nombre,
+        nombre_robot:   p.robot,
+        institucion:    p.institucion,
+        categoria:      p.categoria,
+        ciudad:         p.ciudad,
+        qr_image:       qrUrl,
+        name:           'SucreBot 2026',
+        email:          'sucrebotclub@tecnologicosucre.edu.ec'
+      });
+
+      cerrarModalRevisar();
+      showToast('📧 QR reenviado a ' + p.correo);
+    } catch(e) {
+      btn.disabled    = false;
+      btn.textContent = '📧 Reenviar QR por email';
+      showToast('Error al reenviar: ' + (e.text || e.message || JSON.stringify(e)), true);
     }
   }
 
