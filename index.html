@@ -606,10 +606,6 @@
           <div class="lista-robot">${p.robot}${p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : ''}</div>
           <div class="lista-inst">${p.nombre ? p.nombre + ' · ' : ''}${p.institucion}${p.ciudad ? ' · ' + p.ciudad : ''}</div>
         </div>
-        <div class="lista-actions">
-          <button class="btn-ver" onclick="verQR('${p.id}','${p.robot}','${p.institucion}','${p.ciudad||''}')">Ver QR</button>
-          <button class="btn-del" onclick="pedirBorrar('${p.id}','${p.robot}','${p.institucion}')">🗑</button>
-        </div>
       </div>
     `).join('');
   }
