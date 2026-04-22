@@ -690,12 +690,9 @@
   }
 
   async function gasPost(data) {
-    const r = await fetch(GAS_URL, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      redirect: 'follow',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-    });
+    // GAS no soporta CORS en POST desde browser, usamos GET con parámetros
+    const url = GAS_URL + '?' + new URLSearchParams(data);
+    const r = await fetch(url);
     return r.json();
   }
 
