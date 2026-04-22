@@ -296,8 +296,28 @@
     .btn-del:hover { background: rgba(255,59,59,0.35); border-color: #ff8888; color: #ffffff; }
 
     @media (max-width: 600px) {
+      /* Título más pequeño */
+      .page-hero h2 { font-size: 1.8rem; letter-spacing: 1px; }
+      .page-hero p  { font-size: 12px; }
+
+      /* Ocultar cabecera de columnas en móvil */
       .lista-header { display: none; }
-      .lista-item { grid-template-columns: 1fr 1fr; row-gap: 4px; }
+
+      /* Cada fila como tarjeta vertical */
+      .lista-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 14px 0;
+      }
+      .lista-robot { font-size: 1rem; }
+      .lista-inst  { font-size: 0.8rem; }
+
+      /* Modal más compacto */
+      .modal-revisar-datos { grid-template-columns: 1fr; }
+
+      /* Wrapper con menos padding */
+      .wrapper { padding: 0 12px 40px; }
     }
 
     /* Botón Revisar (solo staff) */
