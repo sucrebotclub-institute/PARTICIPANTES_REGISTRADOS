@@ -298,34 +298,89 @@
       .lista-item { grid-template-columns: 1fr 1fr; row-gap: 4px; }
     }
 
-    /* Modal borrar */
+    /* Botón Revisar (solo staff) */
+    .btn-revisar {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.5); color: #ffffff;
+      font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em;
+      padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .btn-revisar:hover { background: rgba(255,255,255,0.28); }
+
+    /* Modal Revisar */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
       z-index: 1000; display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity 0.2s;
     }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
-    .modal-box {
-      background: #1a5ca8; border: 1px solid rgba(255,255,255,0.2); border-radius: 16px;
-      padding: 28px 28px 22px; max-width: 360px; width: 90%;
-      transform: scale(0.92); transition: transform 0.2s;
+
+    .modal-revisar-box {
+      background: #ffffff; border-radius: 16px; width: 90%; max-width: 560px;
+      max-height: 90vh; overflow-y: auto;
+      transform: scale(0.93); transition: transform 0.2s;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
     }
-    .modal-overlay.show .modal-box { transform: scale(1); }
-    .modal-icon { font-size: 2rem; margin-bottom: 10px; }
-    .modal-title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: #ffaaaa; margin-bottom: 8px; }
-    .modal-name { font-size: 1rem; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
-    .modal-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-bottom: 22px; }
-    .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .modal-cancel {
-      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3); color: #ffffff;
-      font-family: var(--font-body); font-size: 0.85rem; padding: 11px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
+    .modal-overlay.show .modal-revisar-box { transform: scale(1); }
+
+    .modal-revisar-header {
+      background: #1a5ca8; padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-radius: 16px 16px 0 0;
     }
-    .modal-cancel:hover { background: rgba(255,255,255,0.22); }
-    .modal-confirm {
-      background: rgba(255,59,59,0.25); border: 1px solid rgba(255,120,120,0.5); color: #ffcccc;
-      font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 11px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
+    .modal-revisar-title {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.65); margin-bottom: 4px; text-transform: uppercase;
     }
-    .modal-confirm:hover { background: rgba(255,59,59,0.45); color: #ffffff; }
+    .modal-revisar-robot { font-size: 1.2rem; font-weight: 700; color: #ffffff; }
+    .modal-revisar-close {
+      background: rgba(255,255,255,0.15); border: none; color: #ffffff;
+      width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      font-size: 0.9rem; transition: background 0.15s; flex-shrink: 0;
+    }
+    .modal-revisar-close:hover { background: rgba(255,255,255,0.28); }
+
+    .modal-revisar-datos {
+      padding: 20px 24px; border-bottom: 1px solid #e8edf4;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .rev-fila { display: flex; flex-direction: column; gap: 2px; }
+    .rev-fila span { font-size: 0.68rem; color: #8a96b0; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; }
+    .rev-fila strong { font-size: 0.88rem; color: #1a2a4a; font-weight: 600; }
+
+    .modal-revisar-comprobante {
+      padding: 20px 24px; border-bottom: 1px solid #e8edf4; text-align: center;
+    }
+    .rev-comprobante-label {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
+      color: #8a96b0; margin-bottom: 12px; text-transform: uppercase;
+    }
+    #rev-comprobante {
+      max-width: 100%; max-height: 280px; border-radius: 8px;
+      border: 2px solid #e0e6f0; display: block; margin: 0 auto 10px;
+    }
+    #rev-comprobante-link {
+      font-size: 0.78rem; color: #1a5ca8; text-decoration: none;
+      font-family: var(--font-mono); display: inline-block;
+    }
+    #rev-comprobante-link:hover { text-decoration: underline; }
+
+    .modal-revisar-btns {
+      padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .btn-rev-eliminar {
+      background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3); color: #c0392b;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+      padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-rev-eliminar:hover { background: rgba(220,50,50,0.16); }
+    .btn-rev-eliminar:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-rev-aprobar {
+      background: #1a5ca8; border: 1px solid #1a5ca8; color: #ffffff;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+      padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-rev-aprobar:hover { background: #1a3a6e; }
+    .btn-rev-aprobar:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* Toast */
     .toast {
@@ -456,17 +511,41 @@
     </div>
   </div>
 
-  <!-- ══════════════════════ MODAL BORRAR ══════════════════════ -->
-  <div class="modal-overlay" id="modal-borrar">
-    <div class="modal-box">
-      <div class="modal-icon">🗑</div>
-      <div class="modal-title">CONFIRMAR ELIMINACIÓN</div>
-      <div class="modal-name" id="modal-robot-nombre">—</div>
-      <div class="modal-sub" id="modal-robot-sub">Esta acción no se puede deshacer.</div>
-      <div class="modal-btns">
-        <button class="modal-cancel" onclick="cerrarModal()">Cancelar</button>
-        <button class="modal-confirm" onclick="confirmarBorrar()">Sí, eliminar</button>
+  <!-- ══════════════════════ MODAL REVISAR (STAFF) ══════════════════════ -->
+  <div class="modal-overlay" id="modal-revisar">
+    <div class="modal-revisar-box">
+
+      <div class="modal-revisar-header">
+        <div>
+          <div class="modal-revisar-title">REVISIÓN DE REGISTRO</div>
+          <div class="modal-revisar-robot" id="rev-robot">—</div>
+        </div>
+        <button class="modal-revisar-close" onclick="cerrarModalRevisar()">✕</button>
       </div>
+
+      <!-- Datos del participante -->
+      <div class="modal-revisar-datos">
+        <div class="rev-fila"><span>Categoría</span><strong id="rev-categoria">—</strong></div>
+        <div class="rev-fila"><span>Participante</span><strong id="rev-nombre">—</strong></div>
+        <div class="rev-fila"><span>Institución</span><strong id="rev-institucion">—</strong></div>
+        <div class="rev-fila"><span>Ciudad</span><strong id="rev-ciudad">—</strong></div>
+        <div class="rev-fila"><span>Correo</span><strong id="rev-correo">—</strong></div>
+        <div class="rev-fila"><span>Contacto</span><strong id="rev-contacto">—</strong></div>
+      </div>
+
+      <!-- Comprobante de pago -->
+      <div class="modal-revisar-comprobante">
+        <div class="rev-comprobante-label">COMPROBANTE DE PAGO</div>
+        <img id="rev-comprobante" src="" alt="Comprobante" />
+        <a id="rev-comprobante-link" href="" target="_blank">🔗 Ver imagen completa</a>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="modal-revisar-btns">
+        <button id="btn-eliminar" class="btn-rev-eliminar" onclick="eliminarParticipante()">🗑 Eliminar registro</button>
+        <button id="btn-aprobar"  class="btn-rev-aprobar"  onclick="aprobarParticipante()">✔ Aprobar y enviar QR</button>
+      </div>
+
     </div>
   </div>
 
@@ -508,6 +587,8 @@
     document.getElementById('userName').textContent = data.name || data.email;
     if (data.picture) document.getElementById('userAvatar').src = data.picture;
     document.getElementById('navStaff').style.display = 'inline-flex';
+    // Recargar lista para mostrar botones de revisión
+    if (typeof cargarListaLocal === 'function') cargarListaLocal();
   }
 
   function cerrarSesion() {
@@ -594,12 +675,13 @@
   });
 </script>
 
+
 <!-- QR Code lib -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-  /* ══════════════════ BACKEND GAS ══════════════════ */
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwImMvKTjcj5BL3IHULwEiII0__NwFl5zChXFj4dAVjM6t_AedlvcDX_9ENpFfEkb4CYw/exec';
+  /* ══════════════════ CONFIG ══════════════════ */
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycby8lWwSG8L4PvyY_nazuApGSGoubIwA4oq-_nI1Rse8eeqYYum0o98kB_zz-KoozBGYeQ/exec';
 
   async function gasGet(params) {
     const url = GAS_URL + '?' + new URLSearchParams(params);
@@ -607,95 +689,165 @@
     return r.json();
   }
 
-  /* ══════════════════ QR MODAL ══════════════════ */
-  function verQR(id, robot, inst, ciudad) {
-    const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:2000;display:flex;align-items:center;justify-content:center;';
-    const box = document.createElement('div');
-    box.style.cssText = 'background:#1a1a26;border:1px solid rgba(0,212,255,0.25);border-radius:16px;padding:28px;text-align:center;min-width:260px;';
-    box.innerHTML = `
-      <div style="font-family:DM Mono,monospace;font-size:0.68rem;letter-spacing:0.12em;color:#7a7a8c;margin-bottom:14px;">CÓDIGO QR</div>
-      <div id="qr-modal-canvas" style="background:#fff;border-radius:8px;padding:12px;display:inline-block;margin-bottom:12px;"></div>
-      <div style="font-size:0.95rem;font-weight:600;color:#f0f0f5;margin-bottom:4px;">${robot}</div>
-      <div style="font-size:0.78rem;color:#7a7a8c;margin-bottom:18px;">${inst}${ciudad ? ' · ' + ciudad : ''}</div>
-      <button onclick="this.closest('div[style]').remove()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#7a7a8c;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:0.82rem;">Cerrar</button>
-    `;
-    overlay.appendChild(box);
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
-    new QRCode(document.getElementById('qr-modal-canvas'), {
-      text: id, width: 180, height: 180,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
+  async function gasPost(data) {
+    const r = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      redirect: 'follow',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
     });
+    return r.json();
+  }
+
+  /* ══════════════════ STAFF CHECK ══════════════════ */
+  function esStaff() {
+    const saved = sessionStorage.getItem('sucrebot_user');
+    if (!saved) return false;
+    const user = JSON.parse(saved);
+    const STAFF = ['ftipantocta@tecnologicosucre.edu.ec','sucrebotclub@tecnologicosucre.edu.ec'];
+    return STAFF.includes(user.email);
   }
 
   /* ══════════════════ LISTA ══════════════════ */
+  let participantesData = [];
+
   function cargarListaLocal() {
-    const todos = JSON.parse(localStorage.getItem('participantes') || '[]');
-    const filtro = document.getElementById('filtro-categoria')?.value || '';
-    const lista = filtro ? todos.filter(p => p.categoria === filtro) : todos;
-    const el = document.getElementById('lista-participantes');
+    participantesData = JSON.parse(localStorage.getItem('participantes') || '[]');
+    const filtro  = document.getElementById('filtro-categoria')?.value || '';
+    const lista   = filtro ? participantesData.filter(p => p.categoria === filtro) : participantesData;
+    const el      = document.getElementById('lista-participantes');
     const countEl = document.getElementById('lista-count');
+    const staff   = esStaff();
+
     if (!el) return;
     if (countEl) {
       countEl.textContent = filtro
-        ? lista.length + ' inscrito(s) en esta categoría · ' + todos.length + ' total'
-        : todos.length + ' participante(s) registrado(s) en total';
+        ? lista.length + ' inscrito(s) en esta categoría · ' + participantesData.length + ' total'
+        : participantesData.length + ' participante(s) registrado(s) en total';
     }
     if (lista.length === 0) {
       el.innerHTML = '<p class="empty-list">' + (filtro ? 'No hay inscritos en esta categoría.' : 'Aún no hay participantes.') + '</p>';
       return;
     }
+
     el.innerHTML = lista.slice().reverse().map(p => {
-      const aprobado = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
+      const aprobado    = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
       const badgeEstado = aprobado
-        ? `<span class="badge-aprobado">✔ Aprobado</span>`
-        : `<span class="badge-pendiente">⏳ Pendiente</span>`;
-      return `
-      <div class="lista-item">
-        <div class="lista-robot">${p.robot}</div>
-        <div>${p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : '—'}</div>
-        <div class="lista-inst">${p.institucion || '—'}</div>
-        <div>${badgeEstado}</div>
-      </div>`;
+        ? '<span class="badge-aprobado">✔ Aprobado</span>'
+        : '<span class="badge-pendiente">⏳ Pendiente</span>';
+      const btnStaff = staff
+        ? '<button class="btn-revisar" onclick="abrirModalRevisar(\'' + p.id + '\')">Revisar</button>'
+        : '';
+      return '<div class="lista-item">'
+        + '<div class="lista-robot">' + p.robot + '</div>'
+        + '<div>' + (p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : '—') + '</div>'
+        + '<div class="lista-inst">' + (p.institucion || '—') + '</div>'
+        + '<div style="display:flex;align-items:center;gap:8px;">' + badgeEstado + btnStaff + '</div>'
+        + '</div>';
     }).join('');
   }
 
-  /* ══════════════════ BORRAR ══════════════════ */
-  let idPendienteBorrar = null;
+  /* ══════════════════ MODAL REVISAR (STAFF) ══════════════════ */
+  let participanteEnRevision = null;
 
-  function pedirBorrar(id, robot, inst) {
-    idPendienteBorrar = id;
-    document.getElementById('modal-robot-nombre').textContent = robot;
-    document.getElementById('modal-robot-sub').textContent = inst + ' — Esta acción no se puede deshacer.';
-    document.getElementById('modal-borrar').classList.add('show');
+  function abrirModalRevisar(id) {
+    const p = participantesData.find(x => x.id === id);
+    if (!p) return;
+    participanteEnRevision = p;
+
+    const aprobado = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
+
+    document.getElementById('rev-robot').textContent       = p.robot      || '—';
+    document.getElementById('rev-categoria').textContent   = p.categoria  || '—';
+    document.getElementById('rev-nombre').textContent      = p.nombre     || '—';
+    document.getElementById('rev-institucion').textContent = p.institucion || '—';
+    document.getElementById('rev-ciudad').textContent      = p.ciudad     || '—';
+    document.getElementById('rev-correo').textContent      = p.correo     || '—';
+    document.getElementById('rev-contacto').textContent    = p.contacto   || '—';
+
+    const imgEl  = document.getElementById('rev-comprobante');
+    const linkEl = document.getElementById('rev-comprobante-link');
+    if (p.archivoUrl) {
+      imgEl.src            = p.archivoUrl;
+      imgEl.style.display  = 'block';
+      linkEl.href          = p.archivoUrl;
+      linkEl.style.display = 'inline-block';
+    } else {
+      imgEl.style.display  = 'none';
+      linkEl.style.display = 'none';
+    }
+
+    const btnAprobar  = document.getElementById('btn-aprobar');
+    if (aprobado) {
+      btnAprobar.textContent   = '✔ Ya aprobado';
+      btnAprobar.disabled      = true;
+      btnAprobar.style.opacity = '0.5';
+    } else {
+      btnAprobar.textContent   = '✔ Aprobar y enviar QR';
+      btnAprobar.disabled      = false;
+      btnAprobar.style.opacity = '1';
+    }
+    document.getElementById('btn-eliminar').disabled = false;
+    document.getElementById('modal-revisar').classList.add('show');
   }
-  function cerrarModal() {
-    idPendienteBorrar = null;
-    document.getElementById('modal-borrar').classList.remove('show');
+
+  function cerrarModalRevisar() {
+    participanteEnRevision = null;
+    document.getElementById('modal-revisar').classList.remove('show');
   }
-  function confirmarBorrar() {
-    if (!idPendienteBorrar) return;
-    const id = idPendienteBorrar;
-    cerrarModal();
-    const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
-    localStorage.setItem('participantes', JSON.stringify(lista.filter(p => p.id !== id)));
-    cargarListaLocal();
-    showToast('✓ Participante eliminado');
+
+  async function aprobarParticipante() {
+    if (!participanteEnRevision) return;
+    const btn = document.getElementById('btn-aprobar');
+    btn.disabled    = true;
+    btn.textContent = '⏳ Aprobando...';
+    try {
+      await gasPost({ action: 'aprobarParticipante', id: participanteEnRevision.id });
+      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
+      const idx   = lista.findIndex(p => p.id === participanteEnRevision.id);
+      if (idx >= 0) lista[idx].aprobado = true;
+      localStorage.setItem('participantes', JSON.stringify(lista));
+      cerrarModalRevisar();
+      cargarListaLocal();
+      showToast('✔ Aprobado — QR enviado por email');
+    } catch(e) {
+      btn.disabled    = false;
+      btn.textContent = '✔ Aprobar y enviar QR';
+      showToast('Error al aprobar: ' + e.message, true);
+    }
   }
+
+  async function eliminarParticipante() {
+    if (!participanteEnRevision) return;
+    const btn = document.getElementById('btn-eliminar');
+    btn.disabled    = true;
+    btn.textContent = '⏳ Eliminando...';
+    try {
+      await gasPost({ action: 'eliminarParticipante', id: participanteEnRevision.id });
+      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
+      localStorage.setItem('participantes', JSON.stringify(lista.filter(p => p.id !== participanteEnRevision.id)));
+      cerrarModalRevisar();
+      cargarListaLocal();
+      showToast('🗑 Participante eliminado');
+    } catch(e) {
+      btn.disabled    = false;
+      btn.textContent = '🗑 Eliminar registro';
+      showToast('Error al eliminar: ' + e.message, true);
+    }
+  }
+
   document.addEventListener('click', e => {
-    if (e.target === document.getElementById('modal-borrar')) cerrarModal();
+    if (e.target === document.getElementById('modal-revisar')) cerrarModalRevisar();
   });
 
   /* ══════════════════ TOAST ══════════════════ */
   function showToast(msg, error = false) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
+    t.textContent       = msg;
     t.style.borderColor = error ? 'rgba(255,59,59,0.4)' : 'rgba(0,255,136,0.4)';
-    t.style.color = error ? '#ff3b3b' : '#00ff88';
+    t.style.color       = error ? '#ff3b3b' : '#00ff88';
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    setTimeout(() => t.classList.remove('show'), 3500);
   }
 
   /* ══════════════════ INIT ══════════════════ */
