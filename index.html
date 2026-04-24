@@ -98,15 +98,20 @@
     .lista-filter select option { background: #1a5ca8; color: #ffffff; }
     .lista-filter select:focus { border-color: var(--cyan); }
     .lista-count { font-size: 0.72rem; color: #1a3a6e; font-family: var(--font-mono); margin-bottom: 10px; }
-    .lista-card { background: #1a5ca8; border: 1px solid #1a5ca8; border-radius: 16px; padding: 20px; }
-    .lista-title { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
-    .lista-header { display: grid; grid-template-columns: 2fr 1.5fr 2fr 1fr; gap: 8px; padding: 0 0 8px; border-bottom: 1px solid rgba(255,255,255,0.3); margin-bottom: 4px; }
-    .lista-header span { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); text-transform: uppercase; }
-    .lista-item { display: grid; grid-template-columns: 2fr 1.5fr 2fr 1fr; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
-    .lista-item:last-child { border-bottom: none; }
-    .lista-robot { font-size: 0.88rem; font-weight: 600; color: #ffffff; font-family: 'Exo 2', sans-serif; letter-spacing: 0.3px; }
-    .lista-cat-badge { display: inline-block; font-size: 0.68rem; font-family: var(--font-mono); background: #1a3a6e; color: #ffffff; padding: 3px 8px; border-radius: 10px; border: 1px solid #0e2550; }
-    .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.85); font-family: 'Exo 2', sans-serif; }
+
+    /* ── LISTA OSCURA CON CONTRASTE ── */
+    .lista-card { background: #0d1f42; border: 1px solid #0a1830; border-radius: 16px; padding: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+    .lista-title { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+    .lista-header { display: grid; grid-template-columns: 2fr 1.5fr 2fr 1fr; gap: 8px; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 8px; margin-bottom: 6px; }
+    .lista-header span { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+    .lista-item { display: grid; grid-template-columns: 2fr 1.5fr 2fr 1fr; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 8px; margin-bottom: 4px; transition: background 0.15s; }
+    .lista-item:nth-child(odd) { background: rgba(26,92,168,0.25); }
+    .lista-item:nth-child(even) { background: rgba(0,0,0,0.2); }
+    .lista-item:hover { background: rgba(26,92,168,0.45); }
+    .lista-item:last-child { margin-bottom: 0; }
+    .lista-robot { font-size: 0.88rem; font-weight: 700; color: #ffffff; font-family: 'Exo 2', sans-serif; letter-spacing: 0.3px; }
+    .lista-cat-badge { display: inline-block; font-size: 0.68rem; font-family: var(--font-mono); background: rgba(26,92,168,0.6); color: #a8d4ff; padding: 3px 8px; border-radius: 10px; border: 1px solid rgba(91,200,240,0.25); }
+    .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.7); font-family: 'Exo 2', sans-serif; }
     .badge-aprobado  { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: #ffffff; color: #1a5ca8; border: 1px solid #ffffff; padding: 3px 10px; border-radius: 10px; }
     .badge-pendiente { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: rgba(255,180,0,0.2); color: #ffd966; border: 1px solid rgba(255,180,0,0.5); padding: 3px 10px; border-radius: 10px; }
     .badge-nocumple  { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: rgba(220,50,50,0.2); color: #ff6b6b; border: 1px solid rgba(220,50,50,0.5); padding: 3px 10px; border-radius: 10px; }
@@ -197,8 +202,6 @@
   <nav>
     <a href="https://sucrebotclub-institute.github.io/INICIO/" id="navInicio">Inicio</a>
     <a href="https://sucrebotclub-institute.github.io/INICIO/#institucion" id="navInstitucion">Institución</a>
-
-    <!-- EVENTOS -->
     <div class="nav-dropdown" id="navEventos">
       <a href="javascript:void(0)" id="navEventosLink">Eventos</a>
       <div class="dropdown-menu" id="menuEventos">
@@ -223,18 +226,15 @@
         </div>
       </div>
     </div>
-
-    <!-- PARTICIPANTES -->
     <a href="https://sucrebotclub-institute.github.io/PARTICIPANTES_REGISTRADOS/" id="navPartLink" style="cursor:default;" class="active">Participantes</a>
-        <div class="nav-dropdown" id="navPartDropdown" style="display:none;">
-          <a href="javascript:void(0)" id="navParticipantesLink" class="active" style="cursor:default;">Participantes</a>
-          <div class="dropdown-menu" id="menuParticipantes">
-            <a href="https://sucrebotclub-institute.github.io/MI-REGISTRO/">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mi Registro
-            </a>
-          </div>
-        </div>
-    <!-- STAFF -->
+    <div class="nav-dropdown" id="navPartDropdown" style="display:none;">
+      <a href="javascript:void(0)" id="navParticipantesLink" class="active" style="cursor:default;">Participantes</a>
+      <div class="dropdown-menu" id="menuParticipantes">
+        <a href="https://sucrebotclub-institute.github.io/MI-REGISTRO/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mi Registro
+        </a>
+      </div>
+    </div>
     <div class="nav-dropdown" id="navStaff" style="display:none;">
       <a href="javascript:void(0)" id="navStaffLink">Staff</a>
       <div class="dropdown-menu" id="menuStaff">
@@ -250,8 +250,6 @@
     </div>
   </nav>
 </div>
-
-<!-- SIN g_id_onload — evita la doble inicialización -->
 
 <main>
   <div class="wrapper">
@@ -328,7 +326,6 @@
   <div class="toast" id="toast"></div>
 </main>
 
-
 <script>
   const STAFF_EMAILS = [
     'ftipantocta@tecnologicosucre.edu.ec',
@@ -343,9 +340,7 @@
     return JSON.parse(jsonPayload);
   }
 
-  function handleCredentialResponse(response) {
-    activarSesion(parseJwt(response.credential));
-  }
+  function handleCredentialResponse(response) { activarSesion(parseJwt(response.credential)); }
 
   function activarSesion(data) {
     sessionStorage.setItem('sucrebot_user', JSON.stringify(data));
@@ -355,7 +350,7 @@
     if (data.picture) document.getElementById('userAvatar').src = data.picture;
     if (STAFF_EMAILS.includes(data.email)) {
       document.getElementById('navStaff').style.display = 'flex';
-      } else {
+    } else {
       document.getElementById('navPartLink').style.display = 'none';
       document.getElementById('navPartDropdown').style.display = 'flex';
     }
@@ -373,21 +368,16 @@
     if (typeof cargarListaLocal === 'function') cargarListaLocal();
   }
 
-  // ── Login: una sola inicialización, sin FedCM ──
   function iniciarLogin() {
     google.accounts.id.initialize({
       client_id: '14154960360-fofn56epv2rsiq882sni5ku0q1idemg4.apps.googleusercontent.com',
-      callback: handleCredentialResponse,
-      use_fedcm_for_prompt: false
+      callback: handleCredentialResponse, use_fedcm_for_prompt: false
     });
     google.accounts.id.prompt((notification) => {
       if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        // Fallback: renderizar botón oficial de Google dentro del btn-login
         document.getElementById('btnLogin').innerHTML = '';
-        google.accounts.id.renderButton(
-          document.getElementById('btnLogin'),
-          { theme: 'filled_blue', size: 'medium', text: 'signin_with', shape: 'rectangular' }
-        );
+        google.accounts.id.renderButton(document.getElementById('btnLogin'),
+          { theme: 'filled_blue', size: 'medium', text: 'signin_with', shape: 'rectangular' });
       }
     });
   }
@@ -397,74 +387,43 @@
     if (saved) activarSesion(JSON.parse(saved));
   });
 
-  // ── DROPDOWN EVENTOS ──
   (function() {
-    const navEventos   = document.getElementById('navEventos');
-    const menuEventos  = document.getElementById('menuEventos');
-    const wrapSucrebot = document.getElementById('wrapSucrebot');
-    const menuSucrebot = document.getElementById('menuSucrebot');
-    let t1, t2;
-    navEventos.addEventListener('mouseenter',   () => { clearTimeout(t1); menuEventos.style.display = 'block'; });
-    navEventos.addEventListener('mouseleave',   () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
-    menuEventos.addEventListener('mouseenter',  () => clearTimeout(t1));
-    menuEventos.addEventListener('mouseleave',  () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
-    wrapSucrebot.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); menuSucrebot.classList.add('open'); });
-    wrapSucrebot.addEventListener('mouseleave', () => { t2 = setTimeout(() => menuSucrebot.classList.remove('open'), 180); });
-    menuSucrebot.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); });
-    menuSucrebot.addEventListener('mouseleave', () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
-    navEventos.querySelector('a').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      const isOpen = menuEventos.style.display === 'block';
-      document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
-      menuSucrebot.classList.remove('open');
-      if (!isOpen) menuEventos.style.display = 'block';
-    });
-    document.getElementById('btnSucrebot').addEventListener('touchend', (e) => {
-      e.preventDefault(); e.stopPropagation();
-      menuSucrebot.classList.toggle('open');
-      menuEventos.style.display = 'block';
-    });
+    const navEventos=document.getElementById('navEventos'),menuEventos=document.getElementById('menuEventos'),wrapSucrebot=document.getElementById('wrapSucrebot'),menuSucrebot=document.getElementById('menuSucrebot');
+    let t1,t2;
+    navEventos.addEventListener('mouseenter',()=>{clearTimeout(t1);menuEventos.style.display='block';});
+    navEventos.addEventListener('mouseleave',()=>{t1=setTimeout(()=>{menuEventos.style.display='';menuSucrebot.classList.remove('open');},180);});
+    menuEventos.addEventListener('mouseenter',()=>clearTimeout(t1));
+    menuEventos.addEventListener('mouseleave',()=>{t1=setTimeout(()=>{menuEventos.style.display='';menuSucrebot.classList.remove('open');},180);});
+    wrapSucrebot.addEventListener('mouseenter',()=>{clearTimeout(t1);clearTimeout(t2);menuSucrebot.classList.add('open');});
+    wrapSucrebot.addEventListener('mouseleave',()=>{t2=setTimeout(()=>menuSucrebot.classList.remove('open'),180);});
+    menuSucrebot.addEventListener('mouseenter',()=>{clearTimeout(t1);clearTimeout(t2);});
+    menuSucrebot.addEventListener('mouseleave',()=>{t1=setTimeout(()=>{menuEventos.style.display='';menuSucrebot.classList.remove('open');},180);});
+    navEventos.querySelector('a').addEventListener('touchend',(e)=>{e.preventDefault();const o=menuEventos.style.display==='block';document.querySelectorAll('.dropdown-menu').forEach(m=>m.style.display='');menuSucrebot.classList.remove('open');if(!o)menuEventos.style.display='block';});
+    document.getElementById('btnSucrebot').addEventListener('touchend',(e)=>{e.preventDefault();e.stopPropagation();menuSucrebot.classList.toggle('open');menuEventos.style.display='block';});
   })();
 
-  // ── DROPDOWN PARTICIPANTES ──
   (function() {
-    const navPart  = document.getElementById('navParticipantes');
-    const menuPart = document.getElementById('menuParticipantes');
+    const navPart=document.getElementById('navPartDropdown'),menuPart=document.getElementById('menuParticipantes');
     let t;
-    navPart.addEventListener('mouseenter',  () => { clearTimeout(t); menuPart.style.display = 'block'; });
-    navPart.addEventListener('mouseleave',  () => { t = setTimeout(() => menuPart.style.display = '', 180); });
-    menuPart.addEventListener('mouseenter', () => clearTimeout(t));
-    menuPart.addEventListener('mouseleave', () => { t = setTimeout(() => menuPart.style.display = '', 180); });
-    document.getElementById('navParticipantesLink').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      const isOpen = menuPart.style.display === 'block';
-      document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
-      if (!isOpen) menuPart.style.display = 'block';
-    });
+    navPart.addEventListener('mouseenter',()=>{clearTimeout(t);menuPart.style.display='block';});
+    navPart.addEventListener('mouseleave',()=>{t=setTimeout(()=>menuPart.style.display='',180);});
+    menuPart.addEventListener('mouseenter',()=>clearTimeout(t));
+    menuPart.addEventListener('mouseleave',()=>{t=setTimeout(()=>menuPart.style.display='',180);});
+    document.getElementById('navParticipantesLink').addEventListener('touchend',(e)=>{e.preventDefault();const o=menuPart.style.display==='block';document.querySelectorAll('.dropdown-menu').forEach(m=>m.style.display='');if(!o)menuPart.style.display='block';});
   })();
 
-  // ── DROPDOWN STAFF ──
   (function() {
-    const navStaff  = document.getElementById('navStaff');
-    const menuStaff = document.getElementById('menuStaff');
+    const navStaff=document.getElementById('navStaff'),menuStaff=document.getElementById('menuStaff');
     let t;
-    navStaff.addEventListener('mouseenter',  () => { clearTimeout(t); menuStaff.style.display = 'block'; });
-    navStaff.addEventListener('mouseleave',  () => { t = setTimeout(() => menuStaff.style.display = '', 180); });
-    menuStaff.addEventListener('mouseenter', () => clearTimeout(t));
-    menuStaff.addEventListener('mouseleave', () => { t = setTimeout(() => menuStaff.style.display = '', 180); });
-    document.getElementById('navStaffLink').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      const isOpen = menuStaff.style.display === 'block';
-      document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
-      if (!isOpen) menuStaff.style.display = 'block';
-    });
+    navStaff.addEventListener('mouseenter',()=>{clearTimeout(t);menuStaff.style.display='block';});
+    navStaff.addEventListener('mouseleave',()=>{t=setTimeout(()=>menuStaff.style.display='',180);});
+    menuStaff.addEventListener('mouseenter',()=>clearTimeout(t));
+    menuStaff.addEventListener('mouseleave',()=>{t=setTimeout(()=>menuStaff.style.display='',180);});
+    document.getElementById('navStaffLink').addEventListener('touchend',(e)=>{e.preventDefault();const o=menuStaff.style.display==='block';document.querySelectorAll('.dropdown-menu').forEach(m=>m.style.display='');if(!o)menuStaff.style.display='block';});
   })();
 
-  document.addEventListener('touchend', (e) => {
-    if (!e.target.closest('.nav-dropdown')) {
-      document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
-      document.querySelectorAll('.sub-dropdown').forEach(m => m.classList.remove('open'));
-    }
+  document.addEventListener('touchend',(e)=>{
+    if(!e.target.closest('.nav-dropdown')){document.querySelectorAll('.dropdown-menu').forEach(m=>m.style.display='');document.querySelectorAll('.sub-dropdown').forEach(m=>m.classList.remove('open'));}
   });
 </script>
 
@@ -506,7 +465,6 @@
     const el      = document.getElementById('lista-participantes');
     const countEl = document.getElementById('lista-count');
     const staff   = esStaff();
-
     if (!el) return;
     if (countEl) {
       countEl.textContent = filtro
@@ -519,9 +477,7 @@
     }
     el.innerHTML = lista.slice().reverse().map(p => {
       const estado   = getEstado(p);
-      const btnStaff = staff
-        ? '<button class="btn-revisar" onclick="abrirModalRevisar(\'' + p.id + '\')">Revisar</button>'
-        : '';
+      const btnStaff = staff ? '<button class="btn-revisar" onclick="abrirModalRevisar(\'' + p.id + '\')">Revisar</button>' : '';
       return '<div class="lista-item">'
         + '<div class="lista-robot">' + p.robot + '</div>'
         + '<div>' + (p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : '—') + '</div>'
@@ -538,7 +494,6 @@
     if (!p) return;
     participanteEnRevision = p;
     const estado = getEstado(p);
-
     document.getElementById('rev-robot').textContent       = p.robot      || '—';
     document.getElementById('rev-categoria').textContent   = p.categoria  || '—';
     document.getElementById('rev-nombre').textContent      = p.nombre     || '—';
@@ -546,158 +501,92 @@
     document.getElementById('rev-ciudad').textContent      = p.ciudad     || '—';
     document.getElementById('rev-correo').textContent      = p.correo     || '—';
     document.getElementById('rev-contacto').textContent    = p.contacto   || '—';
-
-    const imgEl  = document.getElementById('rev-comprobante');
-    const linkEl = document.getElementById('rev-comprobante-link');
-    if (p.archivoUrl) {
-      imgEl.src = p.archivoUrl; imgEl.style.display = 'block';
-      linkEl.href = p.archivoUrl; linkEl.style.display = 'inline-block';
-    } else {
-      imgEl.style.display = 'none'; linkEl.style.display = 'none';
-    }
-
-    const btnEliminar   = document.getElementById('btn-eliminar');
-    const btnAprobar    = document.getElementById('btn-aprobar');
-    const btnReenviar   = document.getElementById('btn-reenviar');
-    const btnDesaprobar = document.getElementById('btn-desaprobar');
-
+    const imgEl=document.getElementById('rev-comprobante'), linkEl=document.getElementById('rev-comprobante-link');
+    if (p.archivoUrl) { imgEl.src=p.archivoUrl; imgEl.style.display='block'; linkEl.href=p.archivoUrl; linkEl.style.display='inline-block'; }
+    else { imgEl.style.display='none'; linkEl.style.display='none'; }
+    const btnEliminar=document.getElementById('btn-eliminar'), btnAprobar=document.getElementById('btn-aprobar');
+    const btnReenviar=document.getElementById('btn-reenviar'), btnDesaprobar=document.getElementById('btn-desaprobar');
     if (estado === 'aprobado') {
-      btnEliminar.style.display   = 'none';
-      btnAprobar.style.display    = 'none';
-      btnReenviar.style.display   = 'block';
-      btnReenviar.textContent     = '📧 Reenviar QR por email';
-      btnReenviar.disabled        = false;
-      btnDesaprobar.style.display = 'block';
-      btnDesaprobar.textContent   = '↩ Marcar como no aprobado';
-      btnDesaprobar.disabled      = false;
+      btnEliminar.style.display='none'; btnAprobar.style.display='none';
+      btnReenviar.style.display='block'; btnReenviar.textContent='📧 Reenviar QR por email'; btnReenviar.disabled=false;
+      btnDesaprobar.style.display='block'; btnDesaprobar.textContent='↩ Marcar como no aprobado'; btnDesaprobar.disabled=false;
     } else {
-      btnEliminar.style.display   = 'block';
-      btnEliminar.textContent     = '✖ No cumple con los requisitos';
-      btnEliminar.disabled        = false;
-      btnAprobar.style.display    = 'block';
-      btnAprobar.textContent      = '✔ Aprobar y enviar QR';
-      btnAprobar.disabled         = false;
-      btnAprobar.style.opacity    = '1';
-      btnReenviar.style.display   = 'none';
-      btnDesaprobar.style.display = 'none';
+      btnEliminar.style.display='block'; btnEliminar.textContent='✖ No cumple con los requisitos'; btnEliminar.disabled=false;
+      btnAprobar.style.display='block'; btnAprobar.textContent='✔ Aprobar y enviar QR'; btnAprobar.disabled=false; btnAprobar.style.opacity='1';
+      btnReenviar.style.display='none'; btnDesaprobar.style.display='none';
     }
-
     document.getElementById('modal-revisar').classList.add('show');
   }
 
-  function cerrarModalRevisar() {
-    participanteEnRevision = null;
-    document.getElementById('modal-revisar').classList.remove('show');
-  }
+  function cerrarModalRevisar() { participanteEnRevision=null; document.getElementById('modal-revisar').classList.remove('show'); }
 
   async function noCumpleRequisitos() {
     if (!participanteEnRevision) return;
-    const btn = document.getElementById('btn-eliminar');
-    btn.disabled = true; btn.textContent = '⏳ Procesando...';
+    const btn=document.getElementById('btn-eliminar'); btn.disabled=true; btn.textContent='⏳ Procesando...';
     try {
-      await gasGet({ action: 'noCumpleRequisitos', id: participanteEnRevision.id });
-      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
-      const idx = lista.findIndex(x => x.id === participanteEnRevision.id);
-      if (idx >= 0) lista[idx].aprobado = 'nocumple';
-      localStorage.setItem('participantes', JSON.stringify(lista));
-      cerrarModalRevisar(); cargarListaLocal();
-      showToast('✖ Marcado como no cumple requisitos');
-    } catch(e) {
-      btn.disabled = false; btn.textContent = '✖ No cumple con los requisitos';
-      showToast('Error: ' + (e.message || JSON.stringify(e)), true);
-    }
+      await gasGet({ action:'noCumpleRequisitos', id:participanteEnRevision.id });
+      const lista=JSON.parse(localStorage.getItem('participantes')||'[]');
+      const idx=lista.findIndex(x=>x.id===participanteEnRevision.id);
+      if(idx>=0) lista[idx].aprobado='nocumple';
+      localStorage.setItem('participantes',JSON.stringify(lista));
+      cerrarModalRevisar(); cargarListaLocal(); showToast('✖ Marcado como no cumple requisitos');
+    } catch(e) { btn.disabled=false; btn.textContent='✖ No cumple con los requisitos'; showToast('Error: '+(e.message||JSON.stringify(e)),true); }
   }
 
   async function aprobarParticipante() {
     if (!participanteEnRevision) return;
-    const p = participanteEnRevision;
-    const btn = document.getElementById('btn-aprobar');
-    btn.disabled = true; btn.textContent = '⏳ Aprobando...';
+    const p=participanteEnRevision, btn=document.getElementById('btn-aprobar');
+    btn.disabled=true; btn.textContent='⏳ Aprobando...';
     try {
-      await gasGet({ action: 'aprobarParticipante', id: p.id });
-      const textoQR = 'SUCREBOT 2026 | Robot: ' + p.robot + ' | Categoria: ' + p.categoria
-        + ' | Institucion: ' + p.institucion + ' | Ciudad: ' + p.ciudad
-        + ' | Participante: ' + p.nombre + ' | ID: ' + p.id;
-      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data=' + encodeURIComponent(textoQR);
-      await emailjs.send('service_t1tb15d', 'template_s9ap2wh', {
-        correo_destino: p.correo, nombre: p.nombre, nombre_robot: p.robot,
-        institucion: p.institucion, categoria: p.categoria, ciudad: p.ciudad,
-        qr_image: qrUrl, name: 'SucreBot 2026', email: 'sucrebotclub@tecnologicosucre.edu.ec'
-      });
-      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
-      const idx = lista.findIndex(x => x.id === p.id);
-      if (idx >= 0) lista[idx].aprobado = true;
-      localStorage.setItem('participantes', JSON.stringify(lista));
-      cerrarModalRevisar(); cargarListaLocal();
-      showToast('✔ Aprobado — QR enviado por email');
-    } catch(e) {
-      btn.disabled = false; btn.textContent = '✔ Aprobar y enviar QR';
-      showToast('Error: ' + (e.text || e.message || JSON.stringify(e)), true);
-    }
+      await gasGet({ action:'aprobarParticipante', id:p.id });
+      const textoQR='SUCREBOT 2026 | Robot: '+p.robot+' | Categoria: '+p.categoria+' | Institucion: '+p.institucion+' | Ciudad: '+p.ciudad+' | Participante: '+p.nombre+' | ID: '+p.id;
+      const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data='+encodeURIComponent(textoQR);
+      await emailjs.send('service_t1tb15d','template_s9ap2wh',{correo_destino:p.correo,nombre:p.nombre,nombre_robot:p.robot,institucion:p.institucion,categoria:p.categoria,ciudad:p.ciudad,qr_image:qrUrl,name:'SucreBot 2026',email:'sucrebotclub@tecnologicosucre.edu.ec'});
+      const lista=JSON.parse(localStorage.getItem('participantes')||'[]');
+      const idx=lista.findIndex(x=>x.id===p.id);
+      if(idx>=0) lista[idx].aprobado=true;
+      localStorage.setItem('participantes',JSON.stringify(lista));
+      cerrarModalRevisar(); cargarListaLocal(); showToast('✔ Aprobado — QR enviado por email');
+    } catch(e) { btn.disabled=false; btn.textContent='✔ Aprobar y enviar QR'; showToast('Error: '+(e.text||e.message||JSON.stringify(e)),true); }
   }
 
   async function reenviarQR() {
     if (!participanteEnRevision) return;
-    const p = participanteEnRevision;
-    const btn = document.getElementById('btn-reenviar');
-    btn.disabled = true; btn.textContent = '⏳ Enviando...';
+    const p=participanteEnRevision, btn=document.getElementById('btn-reenviar');
+    btn.disabled=true; btn.textContent='⏳ Enviando...';
     try {
-      const textoQR = 'SUCREBOT 2026 | Robot: ' + p.robot + ' | Categoria: ' + p.categoria
-        + ' | Institucion: ' + p.institucion + ' | Ciudad: ' + p.ciudad
-        + ' | Participante: ' + p.nombre + ' | ID: ' + p.id;
-      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data=' + encodeURIComponent(textoQR);
-      await emailjs.send('service_t1tb15d', 'template_s9ap2wh', {
-        correo_destino: p.correo, nombre: p.nombre, nombre_robot: p.robot,
-        institucion: p.institucion, categoria: p.categoria, ciudad: p.ciudad,
-        qr_image: qrUrl, name: 'SucreBot 2026', email: 'sucrebotclub@tecnologicosucre.edu.ec'
-      });
-      cerrarModalRevisar();
-      showToast('📧 QR reenviado a ' + p.correo);
-    } catch(e) {
-      btn.disabled = false; btn.textContent = '📧 Reenviar QR por email';
-      showToast('Error al reenviar: ' + (e.text || e.message || JSON.stringify(e)), true);
-    }
+      const textoQR='SUCREBOT 2026 | Robot: '+p.robot+' | Categoria: '+p.categoria+' | Institucion: '+p.institucion+' | Ciudad: '+p.ciudad+' | Participante: '+p.nombre+' | ID: '+p.id;
+      const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data='+encodeURIComponent(textoQR);
+      await emailjs.send('service_t1tb15d','template_s9ap2wh',{correo_destino:p.correo,nombre:p.nombre,nombre_robot:p.robot,institucion:p.institucion,categoria:p.categoria,ciudad:p.ciudad,qr_image:qrUrl,name:'SucreBot 2026',email:'sucrebotclub@tecnologicosucre.edu.ec'});
+      cerrarModalRevisar(); showToast('📧 QR reenviado a '+p.correo);
+    } catch(e) { btn.disabled=false; btn.textContent='📧 Reenviar QR por email'; showToast('Error al reenviar: '+(e.text||e.message||JSON.stringify(e)),true); }
   }
 
   async function desaprobarParticipante() {
     if (!participanteEnRevision) return;
-    const btn = document.getElementById('btn-desaprobar');
-    btn.disabled = true; btn.textContent = '⏳ Procesando...';
+    const btn=document.getElementById('btn-desaprobar'); btn.disabled=true; btn.textContent='⏳ Procesando...';
     try {
-      await gasGet({ action: 'desaprobarParticipante', id: participanteEnRevision.id });
-      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
-      const idx = lista.findIndex(x => x.id === participanteEnRevision.id);
-      if (idx >= 0) lista[idx].aprobado = false;
-      localStorage.setItem('participantes', JSON.stringify(lista));
-      cerrarModalRevisar(); cargarListaLocal();
-      showToast('↩ Participante marcado como pendiente');
-    } catch(e) {
-      btn.disabled = false; btn.textContent = '↩ Marcar como no aprobado';
-      showToast('Error: ' + (e.message || JSON.stringify(e)), true);
-    }
+      await gasGet({ action:'desaprobarParticipante', id:participanteEnRevision.id });
+      const lista=JSON.parse(localStorage.getItem('participantes')||'[]');
+      const idx=lista.findIndex(x=>x.id===participanteEnRevision.id);
+      if(idx>=0) lista[idx].aprobado=false;
+      localStorage.setItem('participantes',JSON.stringify(lista));
+      cerrarModalRevisar(); cargarListaLocal(); showToast('↩ Participante marcado como pendiente');
+    } catch(e) { btn.disabled=false; btn.textContent='↩ Marcar como no aprobado'; showToast('Error: '+(e.message||JSON.stringify(e)),true); }
   }
 
-  document.addEventListener('click', e => {
-    if (e.target === document.getElementById('modal-revisar')) cerrarModalRevisar();
-  });
+  document.addEventListener('click',e=>{ if(e.target===document.getElementById('modal-revisar')) cerrarModalRevisar(); });
 
-  function showToast(msg, error = false) {
-    const t = document.getElementById('toast');
-    t.textContent       = msg;
-    t.style.borderColor = error ? 'rgba(255,59,59,0.4)' : 'rgba(0,255,136,0.4)';
-    t.style.color       = error ? '#ff3b3b' : '#00ff88';
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3500);
+  function showToast(msg,error=false) {
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.style.borderColor=error?'rgba(255,59,59,0.4)':'rgba(0,255,136,0.4)'; t.style.color=error?'#ff3b3b':'#00ff88';
+    t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3500);
   }
 
   cargarListaLocal();
-
-  gasGet({ action: 'getParticipantes' }).then(arr => {
-    if (Array.isArray(arr) && arr.length > 0 && arr[0].id) {
-      localStorage.setItem('participantes', JSON.stringify(arr));
-      cargarListaLocal();
-    }
-  }).catch(() => {});
+  gasGet({ action:'getParticipantes' }).then(arr=>{
+    if(Array.isArray(arr)&&arr.length>0&&arr[0].id){ localStorage.setItem('participantes',JSON.stringify(arr)); cargarListaLocal(); }
+  }).catch(()=>{});
 </script>
 
 </body>
