@@ -48,7 +48,6 @@
     nav a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 15px 34px; font-family: 'Exo 2', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.3px; text-transform: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s, background 0.2s; cursor: pointer; }
     nav a:hover, nav a.active { color: #ffffff; border-bottom-color: #ffffff; background: rgba(0,0,0,0.15); }
 
-    /* ── DROPDOWNS ── */
     .nav-dropdown { position: relative; }
     .nav-dropdown > a { display: flex; align-items: center; gap: 6px; }
     .nav-dropdown > a::after { content: ''; display: inline-block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid rgba(255,255,255,0.6); transition: transform .2s, border-top-color .2s; margin-top: 1px; }
@@ -61,14 +60,9 @@
     .dropdown-menu a:hover { background: rgba(255,255,255,0.07); border-left-color: var(--sucre-blue); }
     .dropdown-menu a svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
     .dropdown-menu a:hover svg { opacity: 1; }
-
-    /* Sub-dropdown nivel 2 (SucreBot 2026 → Registro / Participantes) */
     .sub-dropdown { display: none; position: absolute; top: -3px; left: 100%; min-width: 210px; background: #1e2030; border: 1px solid #2a2d3e; border-top: 3px solid #ffffff; border-radius: 0 8px 8px 8px; box-shadow: 4px 8px 24px rgba(0,0,0,0.3); z-index: 300; }
     .sub-dropdown.open { display: block; }
-
     #navStaff { display: none; }
-    /* Participantes dropdown — "Mi Registro" oculto por defecto */
-    #navMiRegistro { display: none; }
 
     @media (max-width: 768px) {
       body { padding-top: 120px; }
@@ -115,7 +109,7 @@
     .btn-revisar { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.5); color: #ffffff; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
     .btn-revisar:hover { background: rgba(255,255,255,0.28); }
 
-    /* ── MODAL REVISAR ── */
+    /* ── MODAL ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
     .modal-revisar-box { background: #ffffff; border-radius: 16px; width: 90%; max-width: 560px; max-height: 90vh; overflow-y: auto; transform: scale(0.93); transition: transform 0.2s; box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
@@ -134,6 +128,8 @@
     #rev-comprobante { max-width: 100%; max-height: 280px; border-radius: 8px; border: 2px solid #e0e6f0; display: block; margin: 0 auto 10px; }
     #rev-comprobante-link { font-size: 0.78rem; color: #1a5ca8; text-decoration: none; font-family: var(--font-mono); display: inline-block; }
     #rev-comprobante-link:hover { text-decoration: underline; }
+
+    /* Botones del modal */
     .modal-revisar-btns { padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .btn-rev-eliminar { background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3); color: #c0392b; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
     .btn-rev-eliminar:hover { background: rgba(220,50,50,0.16); }
@@ -200,7 +196,7 @@
     <a href="https://sucrebotclub-institute.github.io/INICIO/" id="navInicio">Inicio</a>
     <a href="https://sucrebotclub-institute.github.io/INICIO/#institucion" id="navInstitucion">Institución</a>
 
-    <!-- EVENTOS dropdown -->
+    <!-- EVENTOS -->
     <div class="nav-dropdown" id="navEventos">
       <a href="javascript:void(0)" id="navEventosLink">Eventos</a>
       <div class="dropdown-menu" id="menuEventos">
@@ -212,13 +208,12 @@
             </span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;flex-shrink:0;"><path d="M9 18l6-6-6-6"/></svg>
           </a>
-          <!-- Sub-dropdown SucreBot 2026 -->
           <div id="menuSucrebot" class="sub-dropdown">
             <a href="https://sucrebotclub-institute.github.io/REGISTRO/">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               Registro
             </a>
-            <a href="https://sucrebotclub-institute.github.io/PARTICIPANTES_REGISTRADOS/" style="border-left-color: #ffffff; background: rgba(255,255,255,0.05);">
+            <a href="https://sucrebotclub-institute.github.io/PARTICIPANTES_REGISTRADOS/" style="border-left-color:#ffffff;background:rgba(255,255,255,0.05);">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               Participantes Registrados
             </a>
@@ -227,11 +222,10 @@
       </div>
     </div>
 
-    <!-- PARTICIPANTES dropdown — activo, estamos aquí -->
+    <!-- PARTICIPANTES -->
     <div class="nav-dropdown" id="navParticipantes">
       <a href="javascript:void(0)" id="navParticipantesLink" class="active" style="cursor:default;">Participantes</a>
       <div class="dropdown-menu" id="menuParticipantes">
-        <!-- Mi Registro: oculto hasta que el usuario inicie sesión -->
         <a href="https://sucrebotclub-institute.github.io/MI-REGISTRO/" id="navMiRegistro" style="display:none;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Mi Registro
@@ -239,7 +233,7 @@
       </div>
     </div>
 
-    <!-- STAFF dropdown — visible solo con sesión de staff -->
+    <!-- STAFF -->
     <div class="nav-dropdown" id="navStaff" style="display:none;">
       <a href="javascript:void(0)" id="navStaffLink">Staff</a>
       <div class="dropdown-menu" id="menuStaff">
@@ -295,7 +289,7 @@
     </div>
   </div>
 
-  <!-- ── MODAL REVISAR (staff) ── -->
+  <!-- MODAL REVISAR -->
   <div class="modal-overlay" id="modal-revisar">
     <div class="modal-revisar-box">
       <div class="modal-revisar-header">
@@ -320,11 +314,11 @@
       </div>
       <!--
         PENDIENTE → [✖ No cumple con los requisitos]  [✔ Aprobar y enviar QR]
-        APROBADO  → [📧 Reenviar QR]  (fila completa)
-                    [↩ Marcar como no aprobado]  (fila completa)
+        APROBADO  → [📧 Reenviar QR]       (ancho completo)
+                    [↩ Marcar como no aprobado]  (ancho completo)
       -->
       <div class="modal-revisar-btns">
-        <button id="btn-eliminar"   class="btn-rev-eliminar"   onclick="eliminarParticipante()">✖ No cumple con los requisitos</button>
+        <button id="btn-eliminar"   class="btn-rev-eliminar"   onclick="noCumpleRequisitos()">✖ No cumple con los requisitos</button>
         <button id="btn-aprobar"    class="btn-rev-aprobar"    onclick="aprobarParticipante()">✔ Aprobar y enviar QR</button>
         <button id="btn-reenviar"   class="btn-rev-reenviar"   onclick="reenviarQR()"             style="display:none;grid-column:1/-1;">📧 Reenviar QR por email</button>
         <button id="btn-desaprobar" class="btn-rev-desaprobar" onclick="desaprobarParticipante()" style="display:none;grid-column:1/-1;">↩ Marcar como no aprobado</button>
@@ -351,8 +345,7 @@
   }
 
   function handleCredentialResponse(response) {
-    const data = parseJwt(response.credential);
-    activarSesion(data);
+    activarSesion(parseJwt(response.credential));
   }
 
   function activarSesion(data) {
@@ -361,15 +354,10 @@
     document.getElementById('userInfo').classList.add('visible');
     document.getElementById('userName').textContent = data.name || data.email;
     if (data.picture) document.getElementById('userAvatar').src = data.picture;
-
-    // Mostrar Mi Registro para cualquier usuario logueado
     document.getElementById('navMiRegistro').style.display = 'flex';
-
-    // Mostrar Staff solo si es staff
     if (STAFF_EMAILS.includes(data.email)) {
       document.getElementById('navStaff').style.display = 'flex';
     }
-
     if (typeof cargarListaLocal === 'function') cargarListaLocal();
   }
 
@@ -404,37 +392,26 @@
     const menuSucrebot = document.getElementById('menuSucrebot');
     let t1, t2;
 
-    function openEventos()  { clearTimeout(t1); menuEventos.style.display = 'block'; }
-    function closeEventos() { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); }
-    function openSucrebot() { clearTimeout(t1); clearTimeout(t2); menuSucrebot.classList.add('open'); }
-    function closeSucrebot(){ t2 = setTimeout(() => menuSucrebot.classList.remove('open'), 180); }
-
-    navEventos.addEventListener('mouseenter',   openEventos);
-    navEventos.addEventListener('mouseleave',   closeEventos);
+    navEventos.addEventListener('mouseenter',   () => { clearTimeout(t1); menuEventos.style.display = 'block'; });
+    navEventos.addEventListener('mouseleave',   () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
     menuEventos.addEventListener('mouseenter',  () => clearTimeout(t1));
-    menuEventos.addEventListener('mouseleave',  closeEventos);
-    wrapSucrebot.addEventListener('mouseenter', openSucrebot);
-    wrapSucrebot.addEventListener('mouseleave', closeSucrebot);
+    menuEventos.addEventListener('mouseleave',  () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
+    wrapSucrebot.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); menuSucrebot.classList.add('open'); });
+    wrapSucrebot.addEventListener('mouseleave', () => { t2 = setTimeout(() => menuSucrebot.classList.remove('open'), 180); });
     menuSucrebot.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); });
-    menuSucrebot.addEventListener('mouseleave', closeEventos);
+    menuSucrebot.addEventListener('mouseleave', () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
 
     navEventos.querySelector('a').addEventListener('touchend', (e) => {
       e.preventDefault();
       const isOpen = menuEventos.style.display === 'block';
       document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
       menuSucrebot.classList.remove('open');
-      if (!isOpen) openEventos();
+      if (!isOpen) menuEventos.style.display = 'block';
     });
     document.getElementById('btnSucrebot').addEventListener('touchend', (e) => {
       e.preventDefault(); e.stopPropagation();
       menuSucrebot.classList.toggle('open');
       menuEventos.style.display = 'block';
-    });
-    document.addEventListener('touchend', (e) => {
-      if (!navEventos.contains(e.target)) {
-        menuEventos.style.display = '';
-        menuSucrebot.classList.remove('open');
-      }
     });
   })();
 
@@ -501,8 +478,7 @@
   function esStaff() {
     const saved = sessionStorage.getItem('sucrebot_user');
     if (!saved) return false;
-    const user = JSON.parse(saved);
-    return STAFF_EMAILS.includes(user.email);
+    return STAFF_EMAILS.includes(JSON.parse(saved).email);
   }
 
   let participantesData = [];
@@ -525,7 +501,6 @@
       el.innerHTML = '<p class="empty-list">' + (filtro ? 'No hay inscritos en esta categoría.' : 'Aún no hay participantes.') + '</p>';
       return;
     }
-
     el.innerHTML = lista.slice().reverse().map(p => {
       const aprobado    = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
       const badgeEstado = aprobado
@@ -602,6 +577,25 @@
     document.getElementById('modal-revisar').classList.remove('show');
   }
 
+  // ── "No cumple con los requisitos" — solo desaprueba, NO elimina ──
+  async function noCumpleRequisitos() {
+    if (!participanteEnRevision) return;
+    const btn = document.getElementById('btn-eliminar');
+    btn.disabled = true; btn.textContent = '⏳ Procesando...';
+    try {
+      await gasGet({ action: 'desaprobarParticipante', id: participanteEnRevision.id });
+      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
+      const idx = lista.findIndex(x => x.id === participanteEnRevision.id);
+      if (idx >= 0) lista[idx].aprobado = false;
+      localStorage.setItem('participantes', JSON.stringify(lista));
+      cerrarModalRevisar(); cargarListaLocal();
+      showToast('✖ Marcado como no cumple requisitos');
+    } catch(e) {
+      btn.disabled = false; btn.textContent = '✖ No cumple con los requisitos';
+      showToast('Error: ' + (e.message || JSON.stringify(e)), true);
+    }
+  }
+
   async function aprobarParticipante() {
     if (!participanteEnRevision) return;
     const p = participanteEnRevision;
@@ -650,22 +644,6 @@
     } catch(e) {
       btn.disabled = false; btn.textContent = '📧 Reenviar QR por email';
       showToast('Error al reenviar: ' + (e.text || e.message || JSON.stringify(e)), true);
-    }
-  }
-
-  async function eliminarParticipante() {
-    if (!participanteEnRevision) return;
-    const btn = document.getElementById('btn-eliminar');
-    btn.disabled = true; btn.textContent = '⏳ Procesando...';
-    try {
-      await gasPost({ action: 'eliminarParticipante', id: participanteEnRevision.id });
-      const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
-      localStorage.setItem('participantes', JSON.stringify(lista.filter(p => p.id !== participanteEnRevision.id)));
-      cerrarModalRevisar(); cargarListaLocal();
-      showToast('✖ Registro eliminado por no cumplir requisitos');
-    } catch(e) {
-      btn.disabled = false; btn.textContent = '✖ No cumple con los requisitos';
-      showToast('Error: ' + (e.message || JSON.stringify(e)), true);
     }
   }
 
