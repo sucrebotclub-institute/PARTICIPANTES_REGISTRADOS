@@ -48,6 +48,7 @@
     nav a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 15px 34px; font-family: 'Exo 2', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.3px; text-transform: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s, background 0.2s; cursor: pointer; }
     nav a:hover, nav a.active { color: #ffffff; border-bottom-color: #ffffff; background: rgba(0,0,0,0.15); }
 
+    /* ── DROPDOWNS ── */
     .nav-dropdown { position: relative; }
     .nav-dropdown > a { display: flex; align-items: center; gap: 6px; }
     .nav-dropdown > a::after { content: ''; display: inline-block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid rgba(255,255,255,0.6); transition: transform .2s, border-top-color .2s; margin-top: 1px; }
@@ -60,9 +61,14 @@
     .dropdown-menu a:hover { background: rgba(255,255,255,0.07); border-left-color: var(--sucre-blue); }
     .dropdown-menu a svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
     .dropdown-menu a:hover svg { opacity: 1; }
-    .registro-sub { display: none; position: absolute; top: -3px; left: 100%; min-width: 180px; background: #1e2030; border: 1px solid #2a2d3e; border-top: 3px solid #ffffff; border-radius: 0 8px 8px 8px; box-shadow: 4px 8px 24px rgba(0,0,0,0.3); z-index: 300; }
-    .registro-sub.open { display: block; }
+
+    /* Sub-dropdown nivel 2 (SucreBot 2026 → Registro / Participantes) */
+    .sub-dropdown { display: none; position: absolute; top: -3px; left: 100%; min-width: 210px; background: #1e2030; border: 1px solid #2a2d3e; border-top: 3px solid #ffffff; border-radius: 0 8px 8px 8px; box-shadow: 4px 8px 24px rgba(0,0,0,0.3); z-index: 300; }
+    .sub-dropdown.open { display: block; }
+
     #navStaff { display: none; }
+    /* Participantes dropdown — "Mi Registro" oculto por defecto */
+    #navMiRegistro { display: none; }
 
     @media (max-width: 768px) {
       body { padding-top: 120px; }
@@ -79,7 +85,7 @@
       nav a { padding: 11px 14px; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
       .nav-dropdown { position: static; }
       .dropdown-menu { position: fixed; top: auto; left: 0; right: 0; width: 100%; border-radius: 0; z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-      .registro-sub { position: static !important; width: 100%; border-radius: 0 !important; border-top: none !important; border-left: 3px solid #ffffff; box-shadow: none !important; }
+      .sub-dropdown { position: static !important; width: 100%; border-radius: 0 !important; border-top: none !important; border-left: 3px solid #ffffff; box-shadow: none !important; }
     }
 
     /* ── ESTILOS PARTICIPANTES ── */
@@ -109,6 +115,7 @@
     .btn-revisar { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.5); color: #ffffff; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
     .btn-revisar:hover { background: rgba(255,255,255,0.28); }
 
+    /* ── MODAL REVISAR ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
     .modal-revisar-box { background: #ffffff; border-radius: 16px; width: 90%; max-width: 560px; max-height: 90vh; overflow-y: auto; transform: scale(0.93); transition: transform 0.2s; box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
@@ -127,26 +134,16 @@
     #rev-comprobante { max-width: 100%; max-height: 280px; border-radius: 8px; border: 2px solid #e0e6f0; display: block; margin: 0 auto 10px; }
     #rev-comprobante-link { font-size: 0.78rem; color: #1a5ca8; text-decoration: none; font-family: var(--font-mono); display: inline-block; }
     #rev-comprobante-link:hover { text-decoration: underline; }
-
-    /* ── BOTONES DEL MODAL ── */
     .modal-revisar-btns { padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-    /* Rojo — "No cumple con los requisitos" */
     .btn-rev-eliminar { background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3); color: #c0392b; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
     .btn-rev-eliminar:hover { background: rgba(220,50,50,0.16); }
     .btn-rev-eliminar:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* Azul — "Aprobar y enviar QR" */
     .btn-rev-aprobar { background: #1a5ca8; border: 1px solid #1a5ca8; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
     .btn-rev-aprobar:hover { background: #1a3a6e; }
     .btn-rev-aprobar:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* Azul oscuro — "Reenviar QR" (ancho completo, solo aprobados) */
     .btn-rev-reenviar { background: #1a3a6e; border: 1px solid #1a3a6e; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
     .btn-rev-reenviar:hover { background: #0e2550; }
     .btn-rev-reenviar:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* Amarillo — "Marcar como no aprobado" (ancho completo, solo aprobados) */
     .btn-rev-desaprobar { background: rgba(255,180,0,0.1); border: 1px solid rgba(255,180,0,0.4); color: #b38600; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
     .btn-rev-desaprobar:hover { background: rgba(255,180,0,0.22); }
     .btn-rev-desaprobar:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -203,6 +200,7 @@
     <a href="https://sucrebotclub-institute.github.io/INICIO/" id="navInicio">Inicio</a>
     <a href="https://sucrebotclub-institute.github.io/INICIO/#institucion" id="navInstitucion">Institución</a>
 
+    <!-- EVENTOS dropdown -->
     <div class="nav-dropdown" id="navEventos">
       <a href="javascript:void(0)" id="navEventosLink">Eventos</a>
       <div class="dropdown-menu" id="menuEventos">
@@ -214,18 +212,34 @@
             </span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;flex-shrink:0;"><path d="M9 18l6-6-6-6"/></svg>
           </a>
-          <div id="menuRegistro" class="registro-sub">
+          <!-- Sub-dropdown SucreBot 2026 -->
+          <div id="menuSucrebot" class="sub-dropdown">
             <a href="https://sucrebotclub-institute.github.io/REGISTRO/">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               Registro
+            </a>
+            <a href="https://sucrebotclub-institute.github.io/PARTICIPANTES_REGISTRADOS/" style="border-left-color: #ffffff; background: rgba(255,255,255,0.05);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Participantes Registrados
             </a>
           </div>
         </div>
       </div>
     </div>
 
-    <a href="javascript:void(0)" id="navParticipantes" class="active" style="cursor:default;">Participantes</a>
+    <!-- PARTICIPANTES dropdown — activo, estamos aquí -->
+    <div class="nav-dropdown" id="navParticipantes">
+      <a href="javascript:void(0)" id="navParticipantesLink" class="active" style="cursor:default;">Participantes</a>
+      <div class="dropdown-menu" id="menuParticipantes">
+        <!-- Mi Registro: oculto hasta que el usuario inicie sesión -->
+        <a href="https://sucrebotclub-institute.github.io/MI-REGISTRO/" id="navMiRegistro" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Mi Registro
+        </a>
+      </div>
+    </div>
 
+    <!-- STAFF dropdown — visible solo con sesión de staff -->
     <div class="nav-dropdown" id="navStaff" style="display:none;">
       <a href="javascript:void(0)" id="navStaffLink">Staff</a>
       <div class="dropdown-menu" id="menuStaff">
@@ -281,7 +295,7 @@
     </div>
   </div>
 
-  <!-- ── MODAL REVISAR ── -->
+  <!-- ── MODAL REVISAR (staff) ── -->
   <div class="modal-overlay" id="modal-revisar">
     <div class="modal-revisar-box">
       <div class="modal-revisar-header">
@@ -304,7 +318,6 @@
         <img id="rev-comprobante" src="" alt="Comprobante" />
         <a id="rev-comprobante-link" href="" target="_blank">🔗 Ver imagen completa</a>
       </div>
-
       <!--
         PENDIENTE → [✖ No cumple con los requisitos]  [✔ Aprobar y enviar QR]
         APROBADO  → [📧 Reenviar QR]  (fila completa)
@@ -339,8 +352,7 @@
 
   function handleCredentialResponse(response) {
     const data = parseJwt(response.credential);
-    if (STAFF_EMAILS.includes(data.email)) activarSesion(data);
-    else alert('⚠️ Acceso denegado.\nEste correo no tiene permisos de staff.');
+    activarSesion(data);
   }
 
   function activarSesion(data) {
@@ -349,7 +361,15 @@
     document.getElementById('userInfo').classList.add('visible');
     document.getElementById('userName').textContent = data.name || data.email;
     if (data.picture) document.getElementById('userAvatar').src = data.picture;
-    document.getElementById('navStaff').style.display = 'flex';
+
+    // Mostrar Mi Registro para cualquier usuario logueado
+    document.getElementById('navMiRegistro').style.display = 'flex';
+
+    // Mostrar Staff solo si es staff
+    if (STAFF_EMAILS.includes(data.email)) {
+      document.getElementById('navStaff').style.display = 'flex';
+    }
+
     if (typeof cargarListaLocal === 'function') cargarListaLocal();
   }
 
@@ -358,7 +378,9 @@
     document.getElementById('btnLogin').style.display = 'flex';
     document.getElementById('userInfo').classList.remove('visible');
     document.getElementById('navStaff').style.display = 'none';
+    document.getElementById('navMiRegistro').style.display = 'none';
     google.accounts.id.disableAutoSelect();
+    if (typeof cargarListaLocal === 'function') cargarListaLocal();
   }
 
   function iniciarLogin() {
@@ -379,40 +401,57 @@
     const navEventos   = document.getElementById('navEventos');
     const menuEventos  = document.getElementById('menuEventos');
     const wrapSucrebot = document.getElementById('wrapSucrebot');
-    const menuRegistro = document.getElementById('menuRegistro');
+    const menuSucrebot = document.getElementById('menuSucrebot');
     let t1, t2;
 
     function openEventos()  { clearTimeout(t1); menuEventos.style.display = 'block'; }
-    function closeEventos() { t1 = setTimeout(() => { menuEventos.style.display = ''; menuRegistro.classList.remove('open'); }, 180); }
-    function openRegistro() { clearTimeout(t1); clearTimeout(t2); menuRegistro.classList.add('open'); }
-    function closeRegistro(){ t2 = setTimeout(() => menuRegistro.classList.remove('open'), 180); }
+    function closeEventos() { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); }
+    function openSucrebot() { clearTimeout(t1); clearTimeout(t2); menuSucrebot.classList.add('open'); }
+    function closeSucrebot(){ t2 = setTimeout(() => menuSucrebot.classList.remove('open'), 180); }
 
     navEventos.addEventListener('mouseenter',   openEventos);
     navEventos.addEventListener('mouseleave',   closeEventos);
     menuEventos.addEventListener('mouseenter',  () => clearTimeout(t1));
     menuEventos.addEventListener('mouseleave',  closeEventos);
-    wrapSucrebot.addEventListener('mouseenter', openRegistro);
-    wrapSucrebot.addEventListener('mouseleave', closeRegistro);
-    menuRegistro.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); });
-    menuRegistro.addEventListener('mouseleave', closeEventos);
+    wrapSucrebot.addEventListener('mouseenter', openSucrebot);
+    wrapSucrebot.addEventListener('mouseleave', closeSucrebot);
+    menuSucrebot.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); });
+    menuSucrebot.addEventListener('mouseleave', closeEventos);
 
     navEventos.querySelector('a').addEventListener('touchend', (e) => {
       e.preventDefault();
       const isOpen = menuEventos.style.display === 'block';
       document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
-      menuRegistro.classList.remove('open');
+      menuSucrebot.classList.remove('open');
       if (!isOpen) openEventos();
     });
     document.getElementById('btnSucrebot').addEventListener('touchend', (e) => {
       e.preventDefault(); e.stopPropagation();
-      menuRegistro.classList.toggle('open');
+      menuSucrebot.classList.toggle('open');
       menuEventos.style.display = 'block';
     });
     document.addEventListener('touchend', (e) => {
       if (!navEventos.contains(e.target)) {
         menuEventos.style.display = '';
-        menuRegistro.classList.remove('open');
+        menuSucrebot.classList.remove('open');
       }
+    });
+  })();
+
+  // ── DROPDOWN PARTICIPANTES ──
+  (function() {
+    const navPart  = document.getElementById('navParticipantes');
+    const menuPart = document.getElementById('menuParticipantes');
+    let t;
+    navPart.addEventListener('mouseenter',  () => { clearTimeout(t); menuPart.style.display = 'block'; });
+    navPart.addEventListener('mouseleave',  () => { t = setTimeout(() => menuPart.style.display = '', 180); });
+    menuPart.addEventListener('mouseenter', () => clearTimeout(t));
+    menuPart.addEventListener('mouseleave', () => { t = setTimeout(() => menuPart.style.display = '', 180); });
+    document.getElementById('navParticipantesLink').addEventListener('touchend', (e) => {
+      e.preventDefault();
+      const isOpen = menuPart.style.display === 'block';
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
+      if (!isOpen) menuPart.style.display = 'block';
     });
   })();
 
@@ -420,11 +459,11 @@
   (function() {
     const navStaff  = document.getElementById('navStaff');
     const menuStaff = document.getElementById('menuStaff');
-    let tStaff;
-    navStaff.addEventListener('mouseenter',  () => { clearTimeout(tStaff); menuStaff.style.display = 'block'; });
-    navStaff.addEventListener('mouseleave',  () => { tStaff = setTimeout(() => menuStaff.style.display = '', 180); });
-    menuStaff.addEventListener('mouseenter', () => clearTimeout(tStaff));
-    menuStaff.addEventListener('mouseleave', () => { tStaff = setTimeout(() => menuStaff.style.display = '', 180); });
+    let t;
+    navStaff.addEventListener('mouseenter',  () => { clearTimeout(t); menuStaff.style.display = 'block'; });
+    navStaff.addEventListener('mouseleave',  () => { t = setTimeout(() => menuStaff.style.display = '', 180); });
+    menuStaff.addEventListener('mouseenter', () => clearTimeout(t));
+    menuStaff.addEventListener('mouseleave', () => { t = setTimeout(() => menuStaff.style.display = '', 180); });
     document.getElementById('navStaffLink').addEventListener('touchend', (e) => {
       e.preventDefault();
       const isOpen = menuStaff.style.display === 'block';
@@ -433,25 +472,12 @@
     });
   })();
 
-  document.querySelectorAll('.nav-dropdown:not(#navEventos):not(#navStaff)').forEach(dropdown => {
-    const trigger = dropdown.querySelector(':scope > a');
-    const menu = dropdown.querySelector('.dropdown-menu');
-    if (!trigger || !menu) return;
-    trigger.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      const isOpen = menu.style.display === 'block';
+  // Cerrar dropdowns al tocar fuera
+  document.addEventListener('touchend', (e) => {
+    if (!e.target.closest('.nav-dropdown')) {
       document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
-      if (!isOpen) menu.style.display = 'block';
-    });
-  });
-
-  document.getElementById('navParticipantes').addEventListener('click', e => e.preventDefault());
-
-  document.querySelectorAll('nav a').forEach(a => {
-    a.addEventListener('click', () => {
-      document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
-      a.classList.add('active');
-    });
+      document.querySelectorAll('.sub-dropdown').forEach(m => m.classList.remove('open'));
+    }
   });
 </script>
 
@@ -476,7 +502,7 @@
     const saved = sessionStorage.getItem('sucrebot_user');
     if (!saved) return false;
     const user = JSON.parse(saved);
-    return ['ftipantocta@tecnologicosucre.edu.ec','sucrebotclub@tecnologicosucre.edu.ec'].includes(user.email);
+    return STAFF_EMAILS.includes(user.email);
   }
 
   let participantesData = [];
@@ -548,7 +574,6 @@
     const btnDesaprobar = document.getElementById('btn-desaprobar');
 
     if (aprobado) {
-      // Ya aprobado: ocultar fila 1, mostrar reenviar + desaprobar
       btnEliminar.style.display   = 'none';
       btnAprobar.style.display    = 'none';
       btnReenviar.style.display   = 'block';
@@ -558,7 +583,6 @@
       btnDesaprobar.textContent   = '↩ Marcar como no aprobado';
       btnDesaprobar.disabled      = false;
     } else {
-      // Pendiente: mostrar fila 1, ocultar reenviar + desaprobar
       btnEliminar.style.display   = 'block';
       btnEliminar.textContent     = '✖ No cumple con los requisitos';
       btnEliminar.disabled        = false;
