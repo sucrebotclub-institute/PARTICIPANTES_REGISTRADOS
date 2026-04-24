@@ -103,8 +103,12 @@
     .lista-robot { font-size: 0.88rem; font-weight: 600; color: #ffffff; font-family: 'Exo 2', sans-serif; letter-spacing: 0.3px; }
     .lista-cat-badge { display: inline-block; font-size: 0.68rem; font-family: var(--font-mono); background: #1a3a6e; color: #ffffff; padding: 3px 8px; border-radius: 10px; border: 1px solid #0e2550; }
     .lista-inst { font-size: 0.78rem; color: rgba(255,255,255,0.85); font-family: 'Exo 2', sans-serif; }
-    .badge-aprobado { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: #ffffff; color: #1a5ca8; border: 1px solid #ffffff; padding: 3px 10px; border-radius: 10px; }
+
+    /* ── BADGES DE ESTADO — tres estados ── */
+    .badge-aprobado  { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: #ffffff; color: #1a5ca8; border: 1px solid #ffffff; padding: 3px 10px; border-radius: 10px; }
     .badge-pendiente { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: rgba(255,180,0,0.2); color: #ffd966; border: 1px solid rgba(255,180,0,0.5); padding: 3px 10px; border-radius: 10px; }
+    .badge-nocumple  { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-family: 'Exo 2', sans-serif; font-weight: 700; background: rgba(220,50,50,0.2); color: #ff6b6b; border: 1px solid rgba(220,50,50,0.5); padding: 3px 10px; border-radius: 10px; }
+
     .empty-list { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-align: center; padding: 24px 0; }
     .btn-revisar { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.5); color: #ffffff; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
     .btn-revisar:hover { background: rgba(255,255,255,0.28); }
@@ -128,16 +132,14 @@
     #rev-comprobante { max-width: 100%; max-height: 280px; border-radius: 8px; border: 2px solid #e0e6f0; display: block; margin: 0 auto 10px; }
     #rev-comprobante-link { font-size: 0.78rem; color: #1a5ca8; text-decoration: none; font-family: var(--font-mono); display: inline-block; }
     #rev-comprobante-link:hover { text-decoration: underline; }
-
-    /* Botones del modal */
     .modal-revisar-btns { padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .btn-rev-eliminar { background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3); color: #c0392b; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+    .btn-rev-eliminar  { background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3); color: #c0392b; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
     .btn-rev-eliminar:hover { background: rgba(220,50,50,0.16); }
     .btn-rev-eliminar:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-rev-aprobar { background: #1a5ca8; border: 1px solid #1a5ca8; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+    .btn-rev-aprobar   { background: #1a5ca8; border: 1px solid #1a5ca8; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
     .btn-rev-aprobar:hover { background: #1a3a6e; }
     .btn-rev-aprobar:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-rev-reenviar { background: #1a3a6e; border: 1px solid #1a3a6e; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
+    .btn-rev-reenviar  { background: #1a3a6e; border: 1px solid #1a3a6e; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
     .btn-rev-reenviar:hover { background: #0e2550; }
     .btn-rev-reenviar:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-rev-desaprobar { background: rgba(255,180,0,0.1); border: 1px solid rgba(255,180,0,0.4); color: #b38600; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
@@ -313,9 +315,9 @@
         <a id="rev-comprobante-link" href="" target="_blank">🔗 Ver imagen completa</a>
       </div>
       <!--
-        PENDIENTE → [✖ No cumple con los requisitos]  [✔ Aprobar y enviar QR]
-        APROBADO  → [📧 Reenviar QR]       (ancho completo)
-                    [↩ Marcar como no aprobado]  (ancho completo)
+        PENDIENTE / NO CUMPLE → [✖ No cumple con los requisitos]  [✔ Aprobar y enviar QR]
+        APROBADO              → [📧 Reenviar QR]       (ancho completo)
+                                [↩ Marcar como no aprobado]  (ancho completo)
       -->
       <div class="modal-revisar-btns">
         <button id="btn-eliminar"   class="btn-rev-eliminar"   onclick="noCumpleRequisitos()">✖ No cumple con los requisitos</button>
@@ -391,7 +393,6 @@
     const wrapSucrebot = document.getElementById('wrapSucrebot');
     const menuSucrebot = document.getElementById('menuSucrebot');
     let t1, t2;
-
     navEventos.addEventListener('mouseenter',   () => { clearTimeout(t1); menuEventos.style.display = 'block'; });
     navEventos.addEventListener('mouseleave',   () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
     menuEventos.addEventListener('mouseenter',  () => clearTimeout(t1));
@@ -400,7 +401,6 @@
     wrapSucrebot.addEventListener('mouseleave', () => { t2 = setTimeout(() => menuSucrebot.classList.remove('open'), 180); });
     menuSucrebot.addEventListener('mouseenter', () => { clearTimeout(t1); clearTimeout(t2); });
     menuSucrebot.addEventListener('mouseleave', () => { t1 = setTimeout(() => { menuEventos.style.display = ''; menuSucrebot.classList.remove('open'); }, 180); });
-
     navEventos.querySelector('a').addEventListener('touchend', (e) => {
       e.preventDefault();
       const isOpen = menuEventos.style.display === 'block';
@@ -449,7 +449,6 @@
     });
   })();
 
-  // Cerrar dropdowns al tocar fuera
   document.addEventListener('touchend', (e) => {
     if (!e.target.closest('.nav-dropdown')) {
       document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
@@ -461,16 +460,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-ND4qmleK-e6vkfVT-CBHgVLLbIHmuprmQ37i2Z-Cd-taaV7CScH-YXDcuAJTJtdZQw/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyWDqc6vw2yIUU298fqaffjQwTAX8gIuLEET6YxNAajuK3IitWWlU6pHX0c8NDPJsR6dA/exec';
 
   async function gasGet(params) {
     const url = GAS_URL + '?' + new URLSearchParams(params);
-    const r = await fetch(url);
-    return r.json();
-  }
-
-  async function gasPost(data) {
-    const url = GAS_URL + '?' + new URLSearchParams(data);
     const r = await fetch(url);
     return r.json();
   }
@@ -479,6 +472,19 @@
     const saved = sessionStorage.getItem('sucrebot_user');
     if (!saved) return false;
     return STAFF_EMAILS.includes(JSON.parse(saved).email);
+  }
+
+  // ── Helpers de estado ──
+  function getEstado(p) {
+    if (p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1) return 'aprobado';
+    if (p.aprobado === 'nocumple') return 'nocumple';
+    return 'pendiente';
+  }
+
+  function getBadge(estado) {
+    if (estado === 'aprobado')  return '<span class="badge-aprobado">✔ Aprobado</span>';
+    if (estado === 'nocumple')  return '<span class="badge-nocumple">✖ No cumple</span>';
+    return '<span class="badge-pendiente">⏳ Pendiente</span>';
   }
 
   let participantesData = [];
@@ -502,10 +508,7 @@
       return;
     }
     el.innerHTML = lista.slice().reverse().map(p => {
-      const aprobado    = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
-      const badgeEstado = aprobado
-        ? '<span class="badge-aprobado">✔ Aprobado</span>'
-        : '<span class="badge-pendiente">⏳ Pendiente</span>';
+      const estado = getEstado(p);
       const btnStaff = staff
         ? '<button class="btn-revisar" onclick="abrirModalRevisar(\'' + p.id + '\')">Revisar</button>'
         : '';
@@ -513,7 +516,7 @@
         + '<div class="lista-robot">' + p.robot + '</div>'
         + '<div>' + (p.categoria ? '<span class="lista-cat-badge">' + p.categoria + '</span>' : '—') + '</div>'
         + '<div class="lista-inst">' + (p.institucion || '—') + '</div>'
-        + '<div style="display:flex;align-items:center;gap:8px;">' + badgeEstado + btnStaff + '</div>'
+        + '<div style="display:flex;align-items:center;gap:8px;">' + getBadge(estado) + btnStaff + '</div>'
         + '</div>';
     }).join('');
   }
@@ -524,7 +527,7 @@
     const p = participantesData.find(x => x.id === id);
     if (!p) return;
     participanteEnRevision = p;
-    const aprobado = p.aprobado === true || p.aprobado === 'true' || p.aprobado === 1;
+    const estado = getEstado(p);
 
     document.getElementById('rev-robot').textContent       = p.robot      || '—';
     document.getElementById('rev-categoria').textContent   = p.categoria  || '—';
@@ -548,7 +551,8 @@
     const btnReenviar   = document.getElementById('btn-reenviar');
     const btnDesaprobar = document.getElementById('btn-desaprobar');
 
-    if (aprobado) {
+    if (estado === 'aprobado') {
+      // Aprobado: ocultar fila 1, mostrar reenviar + desaprobar
       btnEliminar.style.display   = 'none';
       btnAprobar.style.display    = 'none';
       btnReenviar.style.display   = 'block';
@@ -558,6 +562,7 @@
       btnDesaprobar.textContent   = '↩ Marcar como no aprobado';
       btnDesaprobar.disabled      = false;
     } else {
+      // Pendiente o no cumple: mostrar fila 1, ocultar reenviar + desaprobar
       btnEliminar.style.display   = 'block';
       btnEliminar.textContent     = '✖ No cumple con los requisitos';
       btnEliminar.disabled        = false;
@@ -577,16 +582,16 @@
     document.getElementById('modal-revisar').classList.remove('show');
   }
 
-  // ── "No cumple con los requisitos" — solo desaprueba, NO elimina ──
+  // ── "No cumple" — guarda 'nocumple' en GAS, NO elimina ──
   async function noCumpleRequisitos() {
     if (!participanteEnRevision) return;
     const btn = document.getElementById('btn-eliminar');
     btn.disabled = true; btn.textContent = '⏳ Procesando...';
     try {
-      await gasGet({ action: 'desaprobarParticipante', id: participanteEnRevision.id });
+      await gasGet({ action: 'noCumpleRequisitos', id: participanteEnRevision.id });
       const lista = JSON.parse(localStorage.getItem('participantes') || '[]');
       const idx = lista.findIndex(x => x.id === participanteEnRevision.id);
-      if (idx >= 0) lista[idx].aprobado = false;
+      if (idx >= 0) lista[idx].aprobado = 'nocumple';
       localStorage.setItem('participantes', JSON.stringify(lista));
       cerrarModalRevisar(); cargarListaLocal();
       showToast('✖ Marcado como no cumple requisitos');
