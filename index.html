@@ -342,10 +342,11 @@
     document.getElementById('userInfo').classList.add('visible');
     document.getElementById('userName').textContent = data.name || data.email;
     if (data.picture) document.getElementById('userAvatar').src = data.picture;
-    document.getElementById('navPartLink').style.display = 'none';
-    document.getElementById('navPartDropdown').style.display = 'flex';
     if (STAFF_EMAILS.includes(data.email)) {
       document.getElementById('navStaff').style.display = 'flex';
+      } else {
+      document.getElementById('navPartLink').style.display = 'none';
+      document.getElementById('navPartDropdown').style.display = 'flex';
     }
     if (typeof cargarListaLocal === 'function') cargarListaLocal();
   }
