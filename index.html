@@ -84,7 +84,8 @@
 
     /* ── ESTILOS PARTICIPANTES ── */
     .wrapper { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
-    .page-hero { padding: 40px 0 32px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 32px; }
+    .page-hero { padding: 40px 0 32px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 32px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+    .page-hero-content { flex: 1; }
     .page-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #1a5ca8; border: 1px solid #1a5ca8; color: #ffffff; font-family: 'Orbitron', monospace; font-size: 9px; font-weight: 700; letter-spacing: 3px; padding: 6px 16px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase; }
     .page-hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #ffffff; animation: blink 1.6s infinite; }
     .page-hero-sub { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
@@ -92,6 +93,14 @@
     .page-hero h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: 3px; color: #1a3a6e; line-height: 1; }
     .page-hero h2 span { color: #1a5ca8; }
     .page-hero p { font-size: 13px; color: #7a7a8c; letter-spacing: 0.5px; }
+
+    /* ── ROBOT CAMPEÓN ANIMADO ── */
+    .robot-champion-wrapper { position: relative; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; }
+    .glow-effect { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; background: radial-gradient(circle, rgba(26,92,168,0.15) 0%, transparent 70%); border-radius: 50%; animation: glow-pulse 3s ease-in-out infinite; pointer-events: none; z-index: -1; }
+    @keyframes glow-pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; } }
+    .robot-champion { width: 100%; height: auto; animation: float 3s ease-in-out infinite, trophy-lift 2s ease-in-out infinite; filter: drop-shadow(0 10px 30px rgba(26,92,168,0.3)); }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+    @keyframes trophy-lift { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-2deg); } 75% { transform: rotate(2deg); } }
 
     /* ── FILTRO — color nav ── */
     .lista-filter {
@@ -182,8 +191,11 @@
     .toast.show { transform: translateX(-50%) translateY(0); }
 
     @media (max-width: 600px) {
+      .page-hero { grid-template-columns: 1fr; gap: 20px; }
       .page-hero h2 { font-size: 1.8rem; letter-spacing: 1px; }
       .page-hero p  { font-size: 12px; }
+      .robot-champion-wrapper { width: 150px; height: 150px; margin: 0 auto; }
+      .glow-effect { width: 170px; height: 170px; }
       .lista-header { display: none; }
       .lista-item { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 0; }
       .lista-robot { font-size: 1rem; }
@@ -281,14 +293,20 @@
 <main>
   <div class="wrapper">
     <div class="page-hero">
-      <div class="page-hero-badge">
-        <div class="page-hero-badge-dot"></div>
-        SucreBot 2026 · Torneo de Robótica
+      <div class="page-hero-content">
+        <div class="page-hero-badge">
+          <div class="page-hero-badge-dot"></div>
+          SucreBot 2026 · Torneo de Robótica
+        </div>
+        <h2>PARTICIPANTES <span>REGISTRADOS</span></h2>
+        <div class="page-hero-sub">
+          <div class="page-hero-line"></div>
+          <p>Lista de todos los equipos inscritos en la competencia.</p>
+        </div>
       </div>
-      <h2>PARTICIPANTES <span>REGISTRADOS</span></h2>
-      <div class="page-hero-sub">
-        <div class="page-hero-line"></div>
-        <p>Lista de todos los equipos inscritos en la competencia.</p>
+      <div class="robot-champion-wrapper">
+        <div class="glow-effect"></div>
+        <img src="robot-campeon.png" alt="Robot Campeón SucreBot" class="robot-champion" />
       </div>
     </div>
 
