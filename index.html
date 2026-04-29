@@ -155,36 +155,37 @@
     .btn-revisar { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.5); color: #ffffff; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
     .btn-revisar:hover { background: rgba(255,255,255,0.28); }
 
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    /* ── MODAL REVISIÓN CON MEJOR CONTRASTE (como MI-REGISTRO) ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
-    .modal-revisar-box { background: #ffffff; border-radius: 16px; width: 90%; max-width: 560px; max-height: 90vh; overflow-y: auto; transform: scale(0.93); transition: transform 0.2s; box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
+    .modal-revisar-box { background: #2b4d7a; border-radius: 16px; width: 90%; max-width: 560px; max-height: 90vh; overflow-y: auto; transform: scale(0.93); transition: transform 0.2s; box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1); }
     .modal-overlay.show .modal-revisar-box { transform: scale(1); }
-    .modal-revisar-header { background: #1a5ca8; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; border-radius: 16px 16px 0 0; }
+    .modal-revisar-header { background: #1a5ca8; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; border-radius: 16px 16px 0 0; border-bottom: 2px solid rgba(255,255,255,0.15); }
     .modal-revisar-title { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.65); margin-bottom: 4px; text-transform: uppercase; }
-    .modal-revisar-robot { font-size: 1.2rem; font-weight: 700; color: #ffffff; }
+    .modal-revisar-robot { font-size: 1.4rem; font-weight: 700; color: #ffffff; letter-spacing: 0.5px; }
     .modal-revisar-close { background: rgba(255,255,255,0.15); border: none; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; transition: background 0.15s; flex-shrink: 0; }
     .modal-revisar-close:hover { background: rgba(255,255,255,0.28); }
-    .modal-revisar-datos { padding: 20px 24px; border-bottom: 1px solid #e8edf4; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .rev-fila { display: flex; flex-direction: column; gap: 2px; }
-    .rev-fila span { font-size: 0.68rem; color: #8a96b0; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; }
-    .rev-fila strong { font-size: 0.88rem; color: #1a2a4a; font-weight: 600; }
-    .modal-revisar-comprobante { padding: 20px 24px; border-bottom: 1px solid #e8edf4; text-align: center; }
-    .rev-comprobante-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; color: #8a96b0; margin-bottom: 12px; text-transform: uppercase; }
-    #rev-comprobante { max-width: 100%; max-height: 280px; border-radius: 8px; border: 2px solid #e0e6f0; display: block; margin: 0 auto 10px; }
-    #rev-comprobante-link { font-size: 0.78rem; color: #1a5ca8; text-decoration: none; font-family: var(--font-mono); display: inline-block; }
-    #rev-comprobante-link:hover { text-decoration: underline; }
-    .modal-revisar-btns { padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .btn-rev-eliminar   { background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3); color: #c0392b; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
-    .btn-rev-eliminar:hover { background: rgba(220,50,50,0.16); }
+    .modal-revisar-datos { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: rgba(0,0,0,0.15); }
+    .rev-fila { display: flex; flex-direction: column; gap: 4px; }
+    .rev-fila span { font-size: 0.68rem; color: rgba(255,255,255,0.55); font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+    .rev-fila strong { font-size: 0.95rem; color: #ffffff; font-weight: 600; }
+    .modal-revisar-comprobante { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(0,0,0,0.1); }
+    .rev-comprobante-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); margin-bottom: 12px; text-transform: uppercase; }
+    #rev-comprobante { max-width: 100%; max-height: 280px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.2); display: block; margin: 0 auto 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    #rev-comprobante-link { font-size: 0.78rem; color: #5bc8f0; text-decoration: none; font-family: var(--font-mono); display: inline-block; }
+    #rev-comprobante-link:hover { text-decoration: underline; color: #7dd3f5; }
+    .modal-revisar-btns { padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: rgba(0,0,0,0.15); }
+    .btn-rev-eliminar   { background: rgba(220,50,50,0.12); border: 1px solid rgba(220,50,50,0.4); color: #ff8888; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+    .btn-rev-eliminar:hover { background: rgba(220,50,50,0.22); }
     .btn-rev-eliminar:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-rev-aprobar    { background: #1a5ca8; border: 1px solid #1a5ca8; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
-    .btn-rev-aprobar:hover { background: #1a3a6e; }
+    .btn-rev-aprobar    { background: #5bc8f0; border: 1px solid #5bc8f0; color: #0a1828; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+    .btn-rev-aprobar:hover { background: #7dd3f5; }
     .btn-rev-aprobar:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-rev-reenviar   { background: #1a3a6e; border: 1px solid #1a3a6e; color: #ffffff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
-    .btn-rev-reenviar:hover { background: #0e2550; }
+    .btn-rev-reenviar   { background: #ffffff; border: 1px solid #ffffff; color: #1a5ca8; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
+    .btn-rev-reenviar:hover { background: rgba(255,255,255,0.9); }
     .btn-rev-reenviar:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-rev-desaprobar { background: rgba(255,180,0,0.1); border: 1px solid rgba(255,180,0,0.4); color: #b38600; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
-    .btn-rev-desaprobar:hover { background: rgba(255,180,0,0.22); }
+    .btn-rev-desaprobar { background: rgba(255,180,0,0.15); border: 1px solid rgba(255,180,0,0.5); color: #ffd966; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; width: 100%; }
+    .btn-rev-desaprobar:hover { background: rgba(255,180,0,0.25); }
     .btn-rev-desaprobar:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--surface2); border: 1px solid rgba(0,255,136,0.4); color: var(--green); font-family: var(--font-mono); font-size: 0.8rem; padding: 12px 24px; border-radius: 30px; transition: transform 0.3s ease; z-index: 9999; white-space: nowrap; }
